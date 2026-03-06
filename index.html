@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cognitive Screening PoC — Open-Source Assessment Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --paper: #EDE8E0;
+    --sage: #6B8C6E;
+    --sage-light: #A8C4AA;
+    --sage-dark: #4A6B4D;
+    --ink: #1E2320;
+    --ink-mid: #3D4A3F;
+    --muted: #8A9690;
+    --warm: #C4956A;
+    --warm-light: #E8C9A8;
+    --red-soft: #C0614A;
+    --gold: #B8973A;
+    --card-bg: #FAFAF7;
+    --border: #D4CDC3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--sage);
+  }
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+  }
+  .header-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--sage-light);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .badge {
+    background: var(--sage);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 6px 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: var(--warm-light);
+    border-left: 4px solid var(--warm);
+    margin: 32px 48px 0;
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-mid);
+    max-width: 900px;
+  }
+  .disclaimer strong { color: var(--ink); }
+
+  /* SOURCE PANEL */
+  .sources-row {
+    display: flex;
+    gap: 12px;
+    padding: 24px 48px 0;
+    max-width: 1000px;
+    flex-wrap: wrap;
+  }
+  .source-chip {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mid);
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .source-chip .dot {
+    width: 7px; height: 7px;
+    background: var(--sage);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    padding: 36px 48px 80px;
+    max-width: 960px;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .test-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .test-description {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+    max-width: 620px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 32px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .card-step {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--sage);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-mid);
+    margin-bottom: 16px;
+  }
+
+  /* WORDS DISPLAY */
+  .words-display {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .word-pill {
+    background: var(--sage);
+    color: var(--cream);
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    padding: 14px 28px;
+    letter-spacing: 0.04em;
+    transition: all 0.5s;
+  }
+  .word-pill.hidden {
+    background: var(--paper);
+    color: var(--paper);
+    border: 2px dashed var(--border);
+  }
+  .word-pill.correct {
+    background: var(--sage-dark);
+    color: var(--cream);
+  }
+  .word-pill.missed {
+    background: var(--red-soft);
+    color: var(--cream);
+  }
+
+  /* TIMER BAR */
+  .timer-bar-wrap {
+    background: var(--paper);
+    height: 6px;
+    margin: 18px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .timer-bar {
+    height: 100%;
+    background: var(--sage);
+    transition: width 1s linear;
+  }
+
+  /* DISTRACTOR TASK */
+  .distractor-box {
+    background: var(--paper);
+    border: 2px dashed var(--border);
+    padding: 24px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .distractor-problem {
+    font-family: 'DM Mono', monospace;
+    font-size: 36px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  .distractor-input {
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    border: none;
+    border-bottom: 3px solid var(--ink);
+    background: transparent;
+    text-align: center;
+    width: 120px;
+    outline: none;
+    color: var(--ink);
+    padding: 4px;
+  }
+
+  /* RECALL INPUT */
+  .recall-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .recall-inputs input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    background: transparent;
+    padding: 8px 4px;
+    outline: none;
+    color: var(--ink);
+    transition: border-color 0.2s;
+    width: 300px;
+  }
+  .recall-inputs input:focus { border-color: var(--sage); }
+  .recall-inputs input::placeholder { color: var(--muted); font-size: 14px; }
+
+  /* DIGIT SPAN */
+  .digit-sequence {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .digit-cell {
+    width: 52px; height: 62px;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .digit-cell.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .digit-cell.blank {
+    background: var(--paper);
+    border: 2px solid var(--border);
+    color: var(--ink);
+  }
+  .digit-input-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .digit-input-cell {
+    width: 48px; height: 56px;
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid var(--border);
+    background: var(--card-bg);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .digit-input-cell:focus { border-color: var(--sage); }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: all 0.15s;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .btn-primary:hover { background: var(--sage-dark); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--ink); }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+
+  /* SCORE DISPLAY */
+  .score-board {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 28px 32px;
+    margin-bottom: 28px;
+  }
+  .score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+  }
+  .score-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--cream);
+  }
+  .score-interp {
+    font-size: 12px;
+    color: var(--sage-light);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* PROGRESS TRACK */
+  .progress-track {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+  .progress-pip {
+    height: 4px;
+    flex: 1;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+  .progress-pip.done { background: var(--sage); }
+  .progress-pip.active { background: var(--warm); }
+
+  /* ANNOTATIONS */
+  .annotation {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding: 14px 18px;
+    border-left: 2px solid var(--border);
+    margin-top: 16px;
+  }
+
+  /* STATE TRANSITIONS */
+  .phase { display: none; }
+  .phase.active { display: block; }
+
+  /* FINAL REPORT */
+  .report-header {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .report-note {
+    background: var(--warm-light);
+    border-left: 4px solid var(--warm);
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-mid);
+    margin: 20px 0;
+  }
+  .result-bar-wrap {
+    background: var(--paper);
+    height: 10px;
+    margin: 8px 0 4px;
+    overflow: hidden;
+  }
+  .result-bar {
+    height: 100%;
+    background: var(--sage);
+    transition: width 1s 0.3s;
+  }
+  .result-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-item:last-child { border-bottom: none; }
+  .result-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .result-detail {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 20px 20px; }
+    main { padding: 24px 20px 60px; }
+    .disclaimer, .sources-row { margin-left: 20px; margin-right: 20px; }
+    .test-title { font-size: 26px; }
+    .sources-row { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-title">Cognitive Assessment — Open-Source PoC</div>
+    <div class="header-subtitle">Mini-Cog Word Recall · Digit Span Forward &amp; Backward</div>
+  </div>
+  <div class="badge">Edu / Demo Only</div>
+</header>
+
+<div class="disclaimer">
+  <strong>Important:</strong> This is an educational proof-of-concept demonstrating how validated open-source assessments work. It is <strong>not</strong> a clinical diagnostic tool. No data is stored. If you have concerns about cognitive health, please consult a qualified clinician. Tests reproduced here are public-domain or freely available research instruments.
+</div>
+
+<div class="sources-row">
+  <div class="source-chip"><div class="dot"></div>Mini-Cog (Borson et al., 2000) — Public domain</div>
+  <div class="source-chip"><div class="dot"></div>Digit Span — WAIS component, research use</div>
+  <div class="source-chip"><div class="dot"></div>Regenstrief QDRS / Passive Digital Marker — Open source</div>
+</div>
+
+<main id="app">
+
+  <!-- PROGRESS -->
+  <div style="margin-bottom: 36px; margin-top: 32px;">
+    <div class="progress-track" id="progressTrack">
+      <div class="progress-pip active" id="pip0"></div>
+      <div class="progress-pip" id="pip1"></div>
+      <div class="progress-pip" id="pip2"></div>
+      <div class="progress-pip" id="pip3"></div>
+      <div class="progress-pip" id="pip4"></div>
+    </div>
+  </div>
+
+  <!-- ===== PHASE 0: INTRO ===== -->
+  <div class="phase active" id="phase-intro">
+    <div class="section-label">Open-Source Demo</div>
+    <div class="test-title">Memory &amp; Attention<br>Screening Battery</div>
+    <div class="test-description">
+      This demo walks through two clinically validated, open-source cognitive tasks — exactly the type that scam sites monetize without proper clinical context. We show the real mechanism, scoring, and limitations transparently.
+    </div>
+
+    <div class="card">
+      <div class="card-step">What's included</div>
+      <h3>Two-Part Assessment</h3>
+      <p><strong>Part 1 — Word Recall (Mini-Cog)</strong><br>
+        You'll see 3 unrelated words. A short distractor task follows. Then you'll try to recall them. Designed by Borson et al. (2000) at UW, takes ~3 minutes, validated in primary care across 30+ studies.
+      </p>
+      <p><strong>Part 2 — Digit Span (Forward &amp; Backward)</strong><br>
+        Sequences of digits are shown one at a time. You repeat them forward, then in reverse. Tests working memory capacity. A subcomponent of the WAIS-IV, widely used in neuropsychology.
+      </p>
+
+      <div class="annotation">
+        Real clinical use: Mini-Cog score 0–2 triggers further evaluation. Digit Span forward span &lt;5 or backward span &lt;3 are associated with working memory deficits. Scam sites show these numbers without this context.
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="startTest()">Begin Assessment →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PHASE 1: WORD REGISTRATION ===== -->
+  <div class="phase" id="phase-register">
+    <div class="section-label">Part 1 of 2 — Mini-Cog · Step 1/3</div>
+    <div class="test-title">Word Registration</div>
+    <div class="test-description">Read the three words below carefully. You will be asked to recall them later.</div>
+
+    <div class="card">
+      <div class="card-step">Memorize these three words</div>
+      <div class="words-display" id="wordDisplay"></div>
+      <div class="timer-bar-wrap">
+        <div class="timer-bar" id="timerBar" style="width:100%"></div>
+      </div>
+      <p id="registerStatus" style="font-family:'DM Mono',monospace; font-size:13px; color:var(--muted);">Study the words above. Continue when ready.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btnAfterRegister" onclick="startDistractor()">Continue →</button>
+      </div>
+
+      <div class="annotation">
+        <strong>Mini-Cog:</strong> Words are chosen to be semantically unrelated (reduces chunking), from different categories. Standard sets: "Banana / Sunrise / Chair" or similar.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PHASE 2: DISTRACTOR TASK ===== -->
+  <div class="phase" id="phase-distractor">
+    <div class="section-label">Part 1 of 2 — Mini-Cog · Step 2/3</div>
+    <div class="test-title">Distractor Task</div>
+    <div class="test-description">To prevent rehearsal, complete these arithmetic problems. Answer as many as you can before time runs out.</div>
+
+    <div class="card">
+      <div class="card-step">Solve the arithmetic</div>
+      <div class="distractor-box">
+        <div class="distractor-problem" id="distractorProblem"></div>
+        <input class="distractor-input" type="number" id="distractorInput" placeholder="?" autocomplete="off">
+      </div>
+      <p style="font-size:13px; color:var(--muted);">Correct: <span id="distractorScore">0</span> &nbsp;|&nbsp; Time remaining: <span id="distractorTime">30</span>s</p>
+      <div class="timer-bar-wrap">
+        <div class="timer-bar" id="distractorBar" style="width:100%"></div>
+      </div>
+
+      <div class="annotation">
+        <strong>Why a distractor?</strong> Without it, participants can rehearse words via inner speech, inflating scores. The arithmetic task disrupts phonological loop maintenance — a key insight from Baddeley's working memory model.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PHASE 3: RECALL ===== -->
+  <div class="phase" id="phase-recall">
+    <div class="section-label">Part 1 of 2 — Mini-Cog · Step 3/3</div>
+    <div class="test-title">Word Recall</div>
+    <div class="test-description">Without any hints, type the three words you memorized earlier.</div>
+
+    <div class="card">
+      <div class="card-step">Recall the three words</div>
+      <div class="recall-inputs">
+        <input type="text" id="recall1" placeholder="First word..." autocomplete="off" autocorrect="off" spellcheck="false">
+        <input type="text" id="recall2" placeholder="Second word..." autocomplete="off" autocorrect="off" spellcheck="false">
+        <input type="text" id="recall3" placeholder="Third word..." autocomplete="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div id="recallFeedback" style="display:none; margin-top:16px;">
+        <div class="words-display" id="recallResultWords"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btnScoreRecall" onclick="scoreRecall()">Score Recall →</button>
+        <button class="btn btn-secondary" id="btnNextPart" style="display:none" onclick="startDigitSpan()">Continue to Part 2 →</button>
+      </div>
+      <div class="annotation">
+        <strong>Scoring:</strong> 1 point per word recalled. Score 0 = high risk flag. Score 1–2 = borderline. Score 3 = passed. In Mini-Cog, this is combined with clock-drawing (we skip clock here for digital feasibility).
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PHASE 4: DIGIT SPAN ===== -->
+  <div class="phase" id="phase-digit">
+    <div class="section-label">Part 2 of 2 — Digit Span</div>
+    <div class="test-title">Working Memory —<br>Digit Span</div>
+    <div class="test-description">Digits will flash one at a time. After the sequence ends, type them back. Forward first, then backward.</div>
+
+    <div class="card">
+      <div class="card-step" id="digitDirection">Forward Span · Level <span id="digitLevel">1</span></div>
+      <div class="digit-sequence" id="digitSequence"></div>
+      <p id="digitStatus" style="font-size:14px; color:var(--muted); text-align:center; min-height:24px; font-family:'DM Mono',monospace; font-size:13px;"></p>
+      <div class="digit-input-row" id="digitInputRow" style="display:none;"></div>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn btn-primary" id="btnDigitAction" onclick="handleDigitAction()">Show Sequence →</button>
+      </div>
+      <div class="annotation" id="digitAnnotation">
+        <strong>Forward Span:</strong> Tests phonological short-term memory. Average adult span: 7±2 digits. Below 5 suggests potential impairment.<br><br>
+        <strong>Backward Span:</strong> Tests working memory manipulation. Average: 5±1. Below 3 is clinically significant.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PHASE 5: RESULTS ===== -->
+  <div class="phase" id="phase-results">
+    <div class="section-label">Assessment Complete</div>
+    <div class="report-header">Your Results</div>
+
+    <div class="report-note">
+      <strong>Reminder:</strong> This is a demo. These scores indicate how you performed on specific tasks, not a clinical diagnosis. Cognitive performance varies with fatigue, stress, age, and many other factors. Only a clinician can interpret these results in context.
+    </div>
+
+    <div class="score-board" id="scoreboard"></div>
+
+    <div class="card" id="resultsDetail">
+      <h3 style="font-family:'DM Serif Display',serif; margin-bottom:20px;">Task Breakdown</h3>
+      <div id="detailItems"></div>
+    </div>
+
+    <div class="card" style="background:var(--paper);">
+      <div class="card-step">What scam sites do differently</div>
+      <h3>The Difference</h3>
+      <p>This transparent PoC shows you your score immediately, explains what it means and what it <em>doesn't</em> mean, and costs nothing. Scam sites:</p>
+      <p>① Show alarming animations to trigger anxiety<br>
+         ② Withhold your score until you enter a phone number or credit card<br>
+         ③ Claim to diagnose Alzheimer's without clinical validation<br>
+         ④ Use the same public-domain tasks without attribution or scoring context<br>
+         ⑤ Have no IRB approval or clinical oversight</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="resetAll()">↺ Restart Demo</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ============================================================
+//  STATE
+// ============================================================
+const WORDS = ["BANANA", "SUNRISE", "CHAIR"]; // Standard Mini-Cog category set
+let recallScore = 0;
+let distractorCorrect = 0;
+let digitForwardSpan = 0;
+let digitBackwardSpan = 0;
+
+// DIGIT SPAN state
+let dsPhase = 'forward'; // 'forward' | 'backward'
+let dsLevel = 2; // start with 2 digits
+let dsTrials = 0;
+let dsConsecutiveFail = 0;
+let dsCurrentSeq = [];
+let dsAction = 'start'; // 'start' | 'showing' | 'input' | 'feedback' | 'done'
+
+// ============================================================
+//  PHASE NAVIGATION
+// ============================================================
+function showPhase(id) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.getElementById('phase-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setPips(activeIdx) {
+  for (let i = 0; i < 5; i++) {
+    const pip = document.getElementById('pip' + i);
+    if (i < activeIdx) { pip.className = 'progress-pip done'; }
+    else if (i === activeIdx) { pip.className = 'progress-pip active'; }
+    else { pip.className = 'progress-pip'; }
+  }
+}
+
+// ============================================================
+//  INTRO → REGISTER
+// ============================================================
+function startTest() {
+  setPips(1);
+  showPhase('register');
+  renderWords();
+}
+
+function renderWords() {
+  const d = document.getElementById('wordDisplay');
+  d.innerHTML = WORDS.map(w => `<div class="word-pill">${w}</div>`).join('');
+}
+
+// ============================================================
+//  DISTRACTOR TASK
+// ============================================================
+let distractorTimer = null;
+let distractorTimeLeft = 30;
+let currentProblem = null;
+
+function startDistractor() {
+  setPips(2);
+  showPhase('distractor');
+  distractorCorrect = 0;
+  distractorTimeLeft = 30;
+  document.getElementById('distractorScore').textContent = '0';
+  newProblem();
+  document.getElementById('distractorInput').focus();
+  document.getElementById('distractorInput').addEventListener('keydown', checkDistractorAnswer);
+
+  distractorTimer = setInterval(() => {
+    distractorTimeLeft--;
+    document.getElementById('distractorTime').textContent = distractorTimeLeft;
+    document.getElementById('distractorBar').style.width = (distractorTimeLeft / 30 * 100) + '%';
+    if (distractorTimeLeft <= 0) {
+      clearInterval(distractorTimer);
+      document.getElementById('distractorInput').removeEventListener('keydown', checkDistractorAnswer);
+      setTimeout(startRecall, 600);
+    }
+  }, 1000);
+}
+
+function newProblem() {
+  const a = Math.floor(Math.random() * 20) + 5;
+  const b = Math.floor(Math.random() * 20) + 5;
+  const ops = ['+', '-'];
+  const op = ops[Math.floor(Math.random() * ops.length)];
+  currentProblem = { a, b, op, answer: op === '+' ? a + b : a - b };
+  document.getElementById('distractorProblem').textContent = `${a} ${op} ${b} = ?`;
+  document.getElementById('distractorInput').value = '';
+}
+
+function checkDistractorAnswer(e) {
+  if (e.key === 'Enter') {
+    const val = parseInt(document.getElementById('distractorInput').value);
+    if (val === currentProblem.answer) {
+      distractorCorrect++;
+      document.getElementById('distractorScore').textContent = distractorCorrect;
+    }
+    newProblem();
+  }
+}
+
+// ============================================================
+//  RECALL
+// ============================================================
+function startRecall() {
+  setPips(3);
+  showPhase('recall');
+  document.getElementById('recall1').focus();
+}
+
+function scoreRecall() {
+  const inputs = [
+    document.getElementById('recall1').value.trim().toUpperCase(),
+    document.getElementById('recall2').value.trim().toUpperCase(),
+    document.getElementById('recall3').value.trim().toUpperCase(),
+  ];
+
+  recallScore = 0;
+  const resultWords = document.getElementById('recallResultWords');
+  resultWords.innerHTML = '';
+
+  WORDS.forEach((word, i) => {
+    const recalled = inputs.includes(word) || inputs.some(inp => inp && word.startsWith(inp.toUpperCase().slice(0, 3)));
+    if (recalled) recallScore++;
+    const cls = recalled ? 'word-pill correct' : 'word-pill missed';
+    const label = recalled ? '✓ ' + word : '✗ ' + word;
+    resultWords.innerHTML += `<div class="${cls}">${label}</div>`;
+  });
+
+  document.getElementById('recallFeedback').style.display = 'block';
+  document.getElementById('btnScoreRecall').style.display = 'none';
+  document.getElementById('btnNextPart').style.display = 'inline-block';
+}
+
+// ============================================================
+//  DIGIT SPAN
+// ============================================================
+function startDigitSpan() {
+  setPips(4);
+  dsPhase = 'forward';
+  dsLevel = 3;
+  dsTrials = 0;
+  dsConsecutiveFail = 0;
+  digitForwardSpan = 0;
+  digitBackwardSpan = 0;
+  dsAction = 'start';
+  showPhase('digit');
+  updateDigitUI();
+}
+
+function updateDigitUI() {
+  document.getElementById('digitDirection').innerHTML =
+    `${dsPhase === 'forward' ? 'Forward' : 'Backward'} Span &nbsp;·&nbsp; Level <span id="digitLevel">${dsLevel}</span>`;
+  document.getElementById('digitStatus').textContent = '';
+  document.getElementById('digitInputRow').style.display = 'none';
+
+  // Render empty cells
+  const seq = document.getElementById('digitSequence');
+  seq.innerHTML = Array(dsLevel).fill(0).map(() =>
+    `<div class="digit-cell blank">—</div>`
+  ).join('');
+
+  const btn = document.getElementById('btnDigitAction');
+  btn.textContent = 'Show Sequence →';
+  btn.disabled = false;
+  dsAction = 'start';
+}
+
+function handleDigitAction() {
+  if (dsAction === 'start') {
+    showDigitSequence();
+  } else if (dsAction === 'input') {
+    scoreDigitSpan();
+  }
+}
+
+function generateSequence(len) {
+  const seq = [];
+  for (let i = 0; i < len; i++) {
+    let d;
+    do { d = Math.floor(Math.random() * 9) + 1; } while (seq.length > 0 && d === seq[seq.length - 1]);
+    seq.push(d);
+  }
+  return seq;
+}
+
+let flashInterval = null;
+
+function showDigitSequence() {
+  dsCurrentSeq = generateSequence(dsLevel);
+  dsAction = 'showing';
+  document.getElementById('btnDigitAction').disabled = true;
+  document.getElementById('digitStatus').textContent = 'Watch carefully...';
+
+  const seqEl = document.getElementById('digitSequence');
+  seqEl.innerHTML = dsCurrentSeq.map(() =>
+    `<div class="digit-cell">?</div>`
+  ).join('');
+
+  let idx = 0;
+  const cells = seqEl.querySelectorAll('.digit-cell');
+
+  const flashNext = () => {
+    if (idx > 0) {
+      cells[idx - 1].textContent = '·';
+      cells[idx - 1].style.background = 'var(--ink-mid)';
+    }
+    if (idx < dsCurrentSeq.length) {
+      cells[idx].textContent = dsCurrentSeq[idx];
+      cells[idx].classList.add('revealed');
+      cells[idx].style.background = 'var(--sage-dark)';
+      idx++;
+      setTimeout(flashNext, 900);
+    } else {
+      // Hide all
+      setTimeout(() => {
+        cells.forEach(c => {
+          c.textContent = '?';
+          c.style.background = 'var(--paper)';
+          c.style.color = 'var(--border)';
+        });
+        renderDigitInputs();
+      }, 500);
+    }
+  };
+  flashNext();
+}
+
+function renderDigitInputs() {
+  dsAction = 'input';
+  const row = document.getElementById('digitInputRow');
+  row.style.display = 'flex';
+  row.innerHTML = dsCurrentSeq.map((_, i) =>
+    `<input class="digit-input-cell" type="text" maxlength="1" inputmode="numeric"
+       id="di${i}" oninput="autoAdvanceDigit(${i})">`
+  ).join('');
+
+  const direction = dsPhase === 'forward' ? 'in order' : 'in REVERSE order';
+  document.getElementById('digitStatus').textContent = `Type the digits ${direction}`;
+  document.getElementById('btnDigitAction').textContent = 'Submit Answer →';
+  document.getElementById('btnDigitAction').disabled = false;
+  document.getElementById('di0').focus();
+}
+
+function autoAdvanceDigit(i) {
+  const el = document.getElementById('di' + i);
+  if (el.value.length === 1 && !isNaN(el.value)) {
+    const next = document.getElementById('di' + (i + 1));
+    if (next) next.focus();
+  }
+}
+
+function scoreDigitSpan() {
+  const inputs = dsCurrentSeq.map((_, i) => {
+    const el = document.getElementById('di' + i);
+    return el ? parseInt(el.value) : NaN;
+  });
+
+  let expected;
+  if (dsPhase === 'forward') {
+    expected = [...dsCurrentSeq];
+  } else {
+    expected = [...dsCurrentSeq].reverse();
+  }
+
+  const correct = expected.every((d, i) => d === inputs[i]);
+  dsTrials++;
+
+  if (correct) {
+    dsConsecutiveFail = 0;
+    if (dsPhase === 'forward') digitForwardSpan = Math.max(digitForwardSpan, dsLevel);
+    else digitBackwardSpan = Math.max(digitBackwardSpan, dsLevel);
+
+    document.getElementById('digitStatus').textContent = `✓ Correct! Advancing...`;
+    dsLevel++;
+    dsConsecutiveFail = 0;
+
+    if (dsLevel > 9) {
+      advancePhaseOrFinish();
+    } else {
+      setTimeout(updateDigitUI, 1200);
+    }
+  } else {
+    dsConsecutiveFail++;
+    document.getElementById('digitStatus').textContent = `✗ Incorrect. ${dsConsecutiveFail >= 2 ? 'Phase complete.' : 'Retry same level.'}`;
+
+    if (dsConsecutiveFail >= 2) {
+      setTimeout(advancePhaseOrFinish, 1200);
+    } else {
+      setTimeout(updateDigitUI, 1400);
+    }
+  }
+}
+
+function advancePhaseOrFinish() {
+  if (dsPhase === 'forward') {
+    dsPhase = 'backward';
+    dsLevel = 2;
+    dsTrials = 0;
+    dsConsecutiveFail = 0;
+    document.getElementById('digitAnnotation').innerHTML =
+      `<strong>Backward Span:</strong> You must reverse the sequence mentally before answering. This taxes the central executive of working memory — the component most sensitive to early cognitive decline.`;
+    updateDigitUI();
+  } else {
+    showResults();
+  }
+}
+
+// ============================================================
+//  RESULTS
+// ============================================================
+function showResults() {
+  setPips(5);
+  showPhase('results');
+
+  // Score interpretation
+  const miniCogInterp = recallScore === 3
+    ? 'Passed — No concern flagged'
+    : recallScore === 2
+    ? 'Borderline — 2/3 words recalled'
+    : recallScore === 1
+    ? 'Low — 1/3 words recalled'
+    : 'Flag — 0/3 words recalled';
+
+  const fwdNorm = digitForwardSpan >= 6 ? 'Within normal range' : digitForwardSpan >= 4 ? 'Below average' : 'Low — warrants evaluation';
+  const bkwNorm = digitBackwardSpan >= 4 ? 'Within normal range' : digitBackwardSpan >= 3 ? 'Below average' : 'Low — warrants evaluation';
+
+  document.getElementById('scoreboard').innerHTML = `
+    <div class="score-row">
+      <div>
+        <div class="score-label">Mini-Cog Word Recall</div>
+        <div class="score-interp">${miniCogInterp}</div>
+      </div>
+      <div class="score-value">${recallScore} / 3</div>
+    </div>
+    <div class="score-row">
+      <div>
+        <div class="score-label">Distractor Arithmetic</div>
+        <div class="score-interp">Engagement measure (not scored)</div>
+      </div>
+      <div class="score-value">${distractorCorrect} ✓</div>
+    </div>
+    <div class="score-row">
+      <div>
+        <div class="score-label">Digit Span Forward</div>
+        <div class="score-interp">${fwdNorm}</div>
+      </div>
+      <div class="score-value">${digitForwardSpan}</div>
+    </div>
+    <div class="score-row">
+      <div>
+        <div class="score-label">Digit Span Backward</div>
+        <div class="score-interp">${bkwNorm}</div>
+      </div>
+      <div class="score-value">${digitBackwardSpan}</div>
+    </div>
+  `;
+
+  const details = document.getElementById('detailItems');
+  details.innerHTML = `
+    <div class="result-item">
+      <div class="result-name">Word Recall (Mini-Cog)</div>
+      <div class="result-bar-wrap"><div class="result-bar" style="width:${(recallScore/3*100)}%"></div></div>
+      <div class="result-detail">${recallScore}/3 words · ${(recallScore/3*100).toFixed(0)}%</div>
+      <div style="font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5;">
+        Clinical cut-off: ≤2 triggers further evaluation. Designed to detect free recall deficit — an early marker in Alzheimer's pathology.
+      </div>
+    </div>
+    <div class="result-item">
+      <div class="result-name">Digit Span Forward</div>
+      <div class="result-bar-wrap"><div class="result-bar" style="width:${Math.min(digitForwardSpan/9*100,100)}%"></div></div>
+      <div class="result-detail">Span of ${digitForwardSpan} · Normative mean: 7±2</div>
+    </div>
+    <div class="result-item">
+      <div class="result-name">Digit Span Backward</div>
+      <div class="result-bar-wrap"><div class="result-bar" style="width:${Math.min(digitBackwardSpan/7*100,100)}%"></div></div>
+      <div class="result-detail">Span of ${digitBackwardSpan} · Normative mean: 5±1</div>
+    </div>
+  `;
+}
+
+function resetAll() {
+  recallScore = 0; distractorCorrect = 0;
+  digitForwardSpan = 0; digitBackwardSpan = 0;
+  dsPhase = 'forward'; dsLevel = 3; dsTrials = 0;
+  dsConsecutiveFail = 0; dsAction = 'start';
+  clearInterval(distractorTimer);
+  setPips(0);
+  showPhase('intro');
+}
+</script>
+</body>
+</html>
