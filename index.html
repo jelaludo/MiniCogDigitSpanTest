@@ -37,7 +37,7 @@
   header {
     background: var(--ink);
     color: var(--cream);
-    padding: 28px 48px;
+    padding: 18px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -70,12 +70,11 @@
   .disclaimer {
     background: var(--warm-light);
     border-left: 4px solid var(--warm);
-    margin: 32px 48px 0;
     padding: 16px 20px;
     font-size: 13px;
     line-height: 1.6;
     color: var(--ink-mid);
-    max-width: 900px;
+    margin-bottom: 24px;
   }
   .disclaimer strong { color: var(--ink); }
 
@@ -83,9 +82,8 @@
   .sources-row {
     display: flex;
     gap: 12px;
-    padding: 24px 48px 0;
-    max-width: 1000px;
     flex-wrap: wrap;
+    margin-bottom: 24px;
   }
   .source-chip {
     background: var(--paper);
@@ -108,7 +106,7 @@
 
   /* MAIN LAYOUT */
   main {
-    padding: 36px 48px 80px;
+    padding: 20px 48px 80px;
     max-width: 960px;
   }
 
@@ -335,7 +333,7 @@
     transition: all 0.15s;
   }
   .btn-primary {
-    background: var(--ink);
+    background: var(--sage);
     color: var(--cream);
   }
   .btn-primary:hover { background: var(--sage-dark); }
@@ -447,6 +445,48 @@
     border-bottom: 1px solid var(--border);
   }
   .result-item:last-child { border-bottom: none; }
+
+  /* REFERENCES */
+  .references {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 32px;
+    margin-top: 28px;
+  }
+  .references h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .ref-entry {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-mid);
+    margin-bottom: 14px;
+    padding-left: 28px;
+    text-indent: -28px;
+  }
+  .ref-entry .ref-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--sage-dark);
+    font-weight: 600;
+  }
+  .ref-entry a {
+    color: var(--sage-dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sage-light);
+  }
+  .ref-entry a:hover { border-color: var(--sage-dark); }
+  .cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--sage-dark);
+    vertical-align: super;
+    cursor: help;
+    border-bottom: 1px dotted var(--sage-light);
+  }
   .result-name {
     font-size: 13px;
     font-weight: 600;
@@ -460,12 +500,113 @@
     margin-top: 2px;
   }
 
+  /* STROOP BUTTONS */
+  .stroop-btn {
+    padding: 14px 28px;
+    border: 3px solid;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: transform 0.1s, box-shadow 0.1s;
+    min-width: 100px;
+  }
+  .stroop-btn:hover { transform: scale(1.05); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  .stroop-btn:active { transform: scale(0.97); }
+  .stroop-btn:disabled { opacity: 0.3; cursor: default; transform: none; box-shadow: none; }
+
+  /* TAB BAR */
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    background: var(--paper);
+    border-bottom: 2px solid var(--border);
+    padding: 0 48px;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 14px 22px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active {
+    color: var(--ink);
+    border-bottom-color: var(--sage);
+    font-weight: 600;
+  }
+  .tab-btn.tbd {
+    color: var(--border);
+    cursor: default;
+    font-style: italic;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* NOTES TAB */
+  .notes-disclaimer {
+    background: var(--warm-light);
+    border-left: 4px solid var(--warm);
+    padding: 14px 20px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink-mid);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .notes-body h1 { font-family: 'DM Serif Display', serif; font-size: 28px; margin: 32px 0 16px; color: var(--ink); }
+  .notes-body h2 { font-family: 'DM Serif Display', serif; font-size: 22px; margin: 28px 0 12px; color: var(--ink); border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .notes-body h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; margin: 20px 0 8px; color: var(--ink-mid); }
+  .notes-body p { font-size: 14px; line-height: 1.7; margin-bottom: 12px; color: var(--ink-mid); }
+  .notes-body ul, .notes-body ol { font-size: 14px; line-height: 1.7; margin: 8px 0 12px 24px; color: var(--ink-mid); }
+  .notes-body li { margin-bottom: 6px; }
+  .notes-body strong { color: var(--ink); }
+  .notes-body code { font-family: 'DM Mono', monospace; font-size: 12px; background: var(--paper); padding: 2px 6px; border-radius: 3px; }
+  .notes-body pre { background: var(--paper); padding: 16px; overflow-x: auto; margin: 12px 0; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 11px; line-height: 1.5; }
+  .notes-body table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }
+  .notes-body th { background: var(--ink); color: var(--cream); padding: 10px 12px; text-align: left; font-family: 'DM Mono', monospace; font-size: 11px; }
+  .notes-body td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .notes-body tr:nth-child(even) td { background: var(--paper); }
+  .notes-body .table-wrap { overflow-x: auto; margin: 16px 0; }
+  .notes-body a { color: var(--sage-dark); text-decoration: underline; }
+  .notes-body a:hover { color: var(--sage); }
+
   @media (max-width: 640px) {
-    header { padding: 20px 20px; }
-    main { padding: 24px 20px 60px; }
-    .disclaimer, .sources-row { margin-left: 20px; margin-right: 20px; }
-    .test-title { font-size: 26px; }
-    .sources-row { padding-left: 20px; padding-right: 20px; }
+    header { padding: 16px 16px; }
+    .header-title { font-size: 18px; }
+    .header-subtitle { font-size: 9px; }
+    .badge { font-size: 9px; padding: 5px 10px; }
+    main { padding: 16px 16px 60px; }
+    .test-title { font-size: 24px; }
+    .test-description { font-size: 13px; margin-bottom: 16px; }
+    .tab-bar { padding: 0 8px; }
+    .tab-btn { padding: 10px 10px; font-size: 10px; letter-spacing: 0.02em; }
+    .card { padding: 20px 16px; }
+    .card h3 { font-size: 16px; }
+    .card p { font-size: 13px; }
+    .annotation { font-size: 11px; padding: 12px; }
+    .btn { padding: 10px 20px; font-size: 13px; }
+    .btn-row { flex-wrap: wrap; gap: 8px; }
+    .section-label { font-size: 9px; }
+    .digit-input-cell { width: 38px; height: 38px; font-size: 18px; }
+    .words-display { font-size: 24px; gap: 16px; }
+    .notes-body h1 { font-size: 22px; }
+    .notes-body h2 { font-size: 18px; }
+    .notes-body p, .notes-body li { font-size: 13px; }
+    .notes-body table { font-size: 11px; }
+    .notes-body th, .notes-body td { padding: 6px 8px; }
+    .notes-disclaimer { font-size: 12px; padding: 10px 14px; }
   }
 </style>
 </head>
@@ -474,25 +615,234 @@
 <header>
   <div>
     <div class="header-title">Cognitive Assessment — Open-Source PoC</div>
-    <div class="header-subtitle">Mini-Cog Word Recall · Digit Span Forward &amp; Backward</div>
+    <div class="header-subtitle" id="headerSubtitle">Mini-Cog Word Recall · Digit Span Forward &amp; Backward</div>
   </div>
-  <div class="badge">Edu / Demo Only</div>
+  <a href="references.html" class="badge" style="text-decoration:none; cursor:pointer; transition: background 0.15s;" onmouseover="this.style.background='var(--sage-dark)'" onmouseout="this.style.background='var(--sage)'">Edu / Demo Only →</a>
 </header>
 
-<div class="disclaimer">
-  <strong>Important:</strong> This is an educational proof-of-concept demonstrating how validated open-source assessments work. It is <strong>not</strong> a clinical diagnostic tool. No data is stored. If you have concerns about cognitive health, please consult a qualified clinician. Tests reproduced here are public-domain or freely available research instruments.
+<div style="padding: 6px 48px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.04em; background: var(--paper);">
+  Educational PoC based on open-source cognitive test research. <strong style="color: var(--red-soft);">NOT</strong> a clinical diagnostic tool.
 </div>
 
-<div class="sources-row">
-  <div class="source-chip"><div class="dot"></div>Mini-Cog (Borson et al., 2000) — Public domain</div>
-  <div class="source-chip"><div class="dot"></div>Digit Span — WAIS component, research use</div>
-  <div class="source-chip"><div class="dot"></div>Regenstrief QDRS / Passive Digital Marker — Open source</div>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('minicog')">Mini-Cog</button>
+  <button class="tab-btn" onclick="switchTab('minicogplus')">Mini-Cog+</button>
+  <button class="tab-btn" onclick="switchTab('fluency')">Verbal Fluency</button>
+  <button class="tab-btn" onclick="switchTab('stroop')">Stroop Test</button>
+  <button class="tab-btn tbd" onclick="return false">Trail Making (TBD)</button>
+  <button class="tab-btn" onclick="switchTab('notes')">Notes</button>
 </div>
 
 <main id="app">
 
+  <!-- TAB: FLUENCY -->
+  <div class="tab-content" id="tab-fluency">
+    <div style="margin-top: 12px;">
+
+      <!-- FLUENCY INTRO -->
+      <div id="fluency-intro">
+        <div class="section-label">Verbal Fluency · Semantic &amp; Phonemic</div>
+        <div class="test-title">Verbal Fluency</div>
+        <div class="test-description">
+          Generate as many words as possible in 60 seconds. Two modes: <strong>Semantic</strong> (words from a category) and <strong>Phonemic</strong> (words starting with a letter). Tests semantic memory, executive function, and retrieval strategy.
+        </div>
+
+        <div class="card">
+          <div class="card-step">Choose your challenge</div>
+          <h3>Semantic Fluency — Categories</h3>
+          <p>Name as many items as you can from one category. This tests the integrity of your semantic network — how well you can systematically search and retrieve from organized knowledge stores.</p>
+          <div class="btn-row" style="flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="startFluency('animals')">Animals</button>
+            <button class="btn btn-primary" onclick="startFluency('fruits')">Fruits &amp; Vegetables</button>
+            <button class="btn btn-primary" onclick="startFluency('tools')">Tools &amp; Utensils</button>
+            <button class="btn btn-primary" onclick="startFluency('clothing')">Clothing</button>
+            <button class="btn btn-secondary" onclick="startFluency('supermarket')">Supermarket Items</button>
+          </div>
+          <div class="annotation" style="margin-top:20px;">
+            <strong>Clinical basis:</strong> Animal naming is the most widely validated category (MoCA, CERAD). Age accounts for 23.4% of variance. Normative means: age 20–39 ~22, age 50–59 ~20, age 60–69 ~18, age 70–79 ~16. Below 15 at any age warrants further evaluation.<br><br>
+            <strong>What counts?</strong> All members of the animal kingdom: mammals, birds, fish, reptiles, amphibians, insects, spiders, crabs, worms, jellyfish — everything. Breeds count (e.g., "poodle" and "dog" are both valid). Spelling is auto-corrected. Unrecognized words are accepted but flagged.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-step">Phonemic Fluency — FAS</div>
+          <h3>Letter Fluency</h3>
+          <p>Name as many words as you can starting with a given letter. No proper nouns, no repeating the same word with different endings (e.g., "run, running, runs" = 1 word). Education accounts for 18.6% of variance in this task — it tests lexical access more than semantic organization.</p>
+          <div class="btn-row" style="flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="startFluency('F')">Letter F</button>
+            <button class="btn btn-primary" onclick="startFluency('A')">Letter A</button>
+            <button class="btn btn-primary" onclick="startFluency('S')">Letter S</button>
+          </div>
+          <div class="annotation" style="margin-top:20px;">
+            <strong>FAS Test:</strong> The standard clinical protocol uses all three letters (F, A, S) sequentially. Average total across all three: 36–44 for ages 20–59, 30–38 for ages 60–79. Per letter: ~12–15 words is typical. Education is a stronger predictor than age for phonemic fluency.
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUENCY ACTIVE TEST -->
+      <div id="fluency-active" style="display:none;">
+        <div class="section-label" id="fluencyModeLabel">Semantic Fluency · Animals</div>
+        <div class="test-title" id="fluencyTitle">Name every animal you can think of</div>
+        <div class="test-description" id="fluencyDesc">Type one word at a time and press Enter. Go as fast as you can — 60 seconds.</div>
+
+        <div class="card">
+          <div class="card-step" id="fluencyTimer">Time remaining: 60s</div>
+          <div class="timer-bar-wrap">
+            <div class="timer-bar" id="fluencyBar" style="width:100%"></div>
+          </div>
+
+          <div style="display:flex; gap:12px; align-items:center; margin:20px 0;">
+            <input type="text" id="fluencyInput" placeholder="Type a word and press Enter..."
+              autocomplete="off" autocorrect="off" spellcheck="false"
+              style="font-family:'DM Sans',sans-serif; font-size:18px; border:none; border-bottom:3px solid var(--ink); background:transparent; padding:10px 4px; outline:none; color:var(--ink); flex:1;">
+            <span id="fluencyCount" style="font-family:'DM Serif Display',serif; font-size:32px; color:var(--sage-dark); min-width:50px; text-align:center;">0</span>
+          </div>
+
+          <div id="fluencyFeedback" style="font-family:'DM Mono',monospace; font-size:12px; color:var(--red-soft); min-height:18px; margin-bottom:12px;"></div>
+
+          <div id="fluencyWordList" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;"></div>
+
+          <div class="annotation" id="fluencyAnnotation" style="margin-top:20px;">
+            <strong>Strategy tip:</strong> Efficient performers use "clustering" (e.g., farm animals, then ocean animals, then birds) and "switching" (jumping between clusters). Both strategies are clinically measured.
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUENCY RESULTS -->
+      <div id="fluency-results" style="display:none;">
+        <div class="section-label">Fluency Results</div>
+        <div class="report-header">Your Results</div>
+
+        <div class="report-note">
+          <strong>Reminder:</strong> This is a demo. Verbal fluency scores are influenced by age, education, language, fatigue, and many other factors. Only a clinician can interpret these results in context.
+        </div>
+
+        <div class="score-board" id="fluencyScoreboard"></div>
+
+        <div class="card" id="fluencyDetailCard">
+          <h3 style="font-family:'DM Serif Display',serif; margin-bottom:12px;">Words Generated</h3>
+          <div id="fluencyResultWords" style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;"></div>
+          <div id="fluencyResultStats" style="font-size:13px; color:var(--ink-mid); line-height:1.7;"></div>
+        </div>
+
+        <div class="card" style="background:var(--paper);">
+          <div class="card-step">What this measures</div>
+          <h3>Fluency Analysis</h3>
+          <div id="fluencyAnalysis"></div>
+          <div class="btn-row" style="margin-top:20px;">
+            <button class="btn btn-primary" onclick="resetFluency()">Try Another Category →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB: STROOP -->
+  <div class="tab-content" id="tab-stroop">
+    <div style="margin-top: 12px;">
+
+      <!-- STROOP INTRO -->
+      <div id="stroop-intro">
+        <div class="section-label">Stroop Test · Inhibition + Processing Speed</div>
+        <div class="test-title">Color-Word<br>Interference</div>
+        <div class="test-description">
+          Name the <strong>INK COLOR</strong> of each word, ignoring what the word says. One of the most replicated findings in cognitive psychology (Stroop, 1935).
+        </div>
+
+        <div class="btn-row" style="margin-top: 0; margin-bottom: 20px;">
+          <button class="btn btn-primary" style="font-size:16px; padding:14px 36px;" onclick="startStroop()">Begin Stroop Test →</button>
+        </div>
+
+        <div class="card">
+          <div class="card-step">Three Phases</div>
+          <h3>How It Works</h3>
+          <p><strong>Phase 1 — Congruent (warm-up):</strong> Word and ink color match. "RED" in red ink. Establishes your baseline reading speed.</p>
+          <p><strong>Phase 2 — Neutral:</strong> Non-color words ("TABLE", "HOUSE") in colored ink. Tests pure color-naming speed without interference.</p>
+          <p><strong>Phase 3 — Incongruent (the real test):</strong> Word and ink color conflict. "RED" in blue ink. You must override automatic reading and name the ink color.</p>
+          <p style="margin-top:12px;">Click the button matching the <strong>INK COLOR</strong>, not the word. 20 trials per phase. Reaction time measured in milliseconds.</p>
+
+          <div class="annotation">
+            <strong>Clinical basis:</strong> The interference score (incongruent RT minus congruent RT) measures inhibitory control — a core executive function. Typical interference: 100–200ms in young adults, increases with age. Elevated interference (&gt;300ms) is associated with frontal lobe dysfunction, ADHD, early dementia, and other disorders affecting executive control.
+          </div>
+        </div>
+      </div>
+
+      <!-- STROOP ACTIVE -->
+      <div id="stroop-active" style="display:none;">
+        <div class="section-label" id="stroopPhaseLabel">Phase 1 of 3 — Congruent</div>
+        <div class="card" style="text-align:center; padding:40px 32px;">
+          <div class="card-step" id="stroopTrialCount">Trial 1 / 20</div>
+          <div id="stroopStimulus" style="font-family:'DM Serif Display',serif; font-size:72px; letter-spacing:0.04em; margin:32px 0; min-height:90px; line-height:1; user-select:none;"></div>
+          <p id="stroopInstruction" style="font-family:'DM Mono',monospace; font-size:13px; color:var(--muted); margin-bottom:24px;">Click the button matching the INK COLOR</p>
+          <div id="stroopButtons" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;"></div>
+          <div id="stroopFeedback" style="font-family:'DM Mono',monospace; font-size:14px; min-height:24px; margin-top:16px;"></div>
+        </div>
+      </div>
+
+      <!-- STROOP RESULTS -->
+      <div id="stroop-results" style="display:none;">
+        <div class="section-label">Stroop Test Complete</div>
+        <div class="report-header">Your Results</div>
+
+        <div class="report-note">
+          <strong>Reminder:</strong> This is a demo. Reaction times vary with device, fatigue, and practice. The interference score (difference between conditions) is more meaningful than raw times. Only a clinician can interpret these results diagnostically.
+        </div>
+
+        <div class="score-board" id="stroopScoreboard"></div>
+
+        <div class="card" id="stroopDetailCard">
+          <h3 style="font-family:'DM Serif Display',serif; margin-bottom:16px;">Trial-by-Trial Breakdown</h3>
+          <div id="stroopDetailItems"></div>
+        </div>
+
+        <div class="card" style="background:var(--paper);">
+          <div class="card-step">What this measures</div>
+          <h3>The Stroop Effect</h3>
+          <div id="stroopAnalysis"></div>
+          <div class="btn-row" style="margin-top:20px;">
+            <button class="btn btn-primary" onclick="resetStroop()">Try Again →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB: TRAIL MAKING (placeholder) -->
+  <div class="tab-content" id="tab-trails">
+    <div style="margin-top: 12px;">
+      <div class="section-label">Trail Making · Processing Speed + Task Switching</div>
+      <div class="test-title">Trail Making<br>Test A &amp; B</div>
+      <div class="test-description">Connect numbered circles in order (Part A), then alternate between numbers and letters: 1-A-2-B-3-C (Part B).</div>
+      <div class="card">
+        <div class="card-step">TBD</div>
+        <h3>Not Yet Planned</h3>
+        <p>Trail Making requires either canvas-based drawing or a click/tap interface. Part A tests processing speed and visual scanning. Part B adds task-switching (executive function) — the difference between A and B completion times is clinically meaningful.</p>
+        <div class="annotation">
+          <strong>Clinical basis:</strong> Part of the MoCA battery. TMT-B is among the most sensitive single tests for executive dysfunction. Normal completion: Part A &lt;29s, Part B &lt;75s (age-adjusted). The B-A difference isolates executive function from motor speed.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: NOTES (Deep Research Report) -->
+  <div class="tab-content" id="tab-notes">
+    <div style="margin-top: 12px;">
+      <div class="notes-disclaimer">
+        This is a Deep Research by OpenAI, hallucinations may be as plentiful as those of a dementia patient.
+      </div>
+      <div class="notes-body" id="notesBody">
+        <p style="color:var(--muted);">Loading research report&hellip;</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: MAIN TEST (Mini-Cog / Mini-Cog+) -->
+  <div class="tab-content active" id="tab-test">
+
   <!-- PROGRESS -->
-  <div style="margin-bottom: 36px; margin-top: 32px;">
+  <div style="margin-bottom: 20px; margin-top: 16px;">
     <div class="progress-track" id="progressTrack">
       <div class="progress-pip active" id="pip0"></div>
       <div class="progress-pip" id="pip1"></div>
@@ -507,25 +857,25 @@
     <div class="section-label">Open-Source Demo</div>
     <div class="test-title">Memory &amp; Attention<br>Screening Battery</div>
     <div class="test-description">
-      This demo walks through two clinically validated, open-source cognitive tasks — exactly the type that scam sites monetize without proper clinical context. We show the real mechanism, scoring, and limitations transparently.
+      Two clinically validated, open-source cognitive tasks. Scam sites on SNS re-use this without context, here we try to show the real mechanism, scoring, and limitations transparently.
+    </div>
+
+    <div class="btn-row" style="margin-top: 0; margin-bottom: 20px;">
+      <button class="btn btn-primary" style="font-size:16px; padding:14px 36px;" onclick="startTest()">Begin Assessment →</button>
     </div>
 
     <div class="card">
       <div class="card-step">What's included</div>
       <h3>Two-Part Assessment</h3>
       <p><strong>Part 1 — Word Recall (Mini-Cog)</strong><br>
-        You'll see 3 unrelated words. A short distractor task follows. Then you'll try to recall them. Designed by Borson et al. (2000) at UW, takes ~3 minutes, validated in primary care across 30+ studies.
+        You'll see 3 unrelated words. A short distractor task follows. Then you'll try to recall them. Designed by Borson et al. <span class="cite" title="Borson et al., 2000">[1]</span> at UW, takes ~3 minutes, validated in primary care across 30+ studies <span class="cite" title="Tsoi et al., 2015">[3]</span>.
       </p>
       <p><strong>Part 2 — Digit Span (Forward &amp; Backward)</strong><br>
-        Sequences of digits are shown one at a time. You repeat them forward, then in reverse. Tests working memory capacity. A subcomponent of the WAIS-IV, widely used in neuropsychology.
+        Sequences of digits are shown one at a time. You repeat them forward, then in reverse. Tests working memory capacity <span class="cite" title="Baddeley, 2000">[4]</span>. A subcomponent of the WAIS-IV <span class="cite" title="Wechsler, 2008">[2]</span>, widely used in neuropsychology.
       </p>
 
       <div class="annotation">
-        Real clinical use: Mini-Cog score 0–2 triggers further evaluation. Digit Span forward span &lt;5 or backward span &lt;3 are associated with working memory deficits. Scam sites show these numbers without this context.
-      </div>
-
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="startTest()">Begin Assessment →</button>
+        Real clinical use: Mini-Cog score 0–2 triggers further evaluation <span class="cite" title="Borson et al., 2000">[1]</span>. Digit Span forward span &lt;5 or backward span &lt;3 are associated with working memory deficits <span class="cite" title="Wechsler, 2008">[2]</span>. Scam sites show these numbers without this context.
       </div>
     </div>
   </div>
@@ -548,7 +898,7 @@
       </div>
 
       <div class="annotation">
-        <strong>Mini-Cog:</strong> Words are chosen to be semantically unrelated (reduces chunking), from different categories. Standard sets: "Banana / Sunrise / Chair" or similar.
+        <strong>Mini-Cog:</strong> Words are chosen to be semantically unrelated (reduces chunking), from different categories <span class="cite" title="Borson et al., 2000">[1]</span>. Standard sets: "Banana / Sunrise / Chair" or similar. The original validation used six standardized word lists <span class="cite" title="Borson et al., 2006">[5]</span>.
       </div>
     </div>
   </div>
@@ -571,7 +921,7 @@
       </div>
 
       <div class="annotation">
-        <strong>Why a distractor?</strong> Without it, participants can rehearse words via inner speech, inflating scores. The arithmetic task disrupts phonological loop maintenance — a key insight from Baddeley's working memory model.
+        <strong>Why a distractor?</strong> Without it, participants can rehearse words via inner speech, inflating scores. The arithmetic task disrupts phonological loop maintenance — a key insight from Baddeley's working memory model <span class="cite" title="Baddeley, 2000">[4]</span>. Scam sites often omit this step entirely, which inflates recall scores and makes their "results" meaningless.
       </div>
     </div>
   </div>
@@ -584,11 +934,7 @@
 
     <div class="card">
       <div class="card-step">Recall the three words</div>
-      <div class="recall-inputs">
-        <input type="text" id="recall1" placeholder="First word..." autocomplete="off" autocorrect="off" spellcheck="false">
-        <input type="text" id="recall2" placeholder="Second word..." autocomplete="off" autocorrect="off" spellcheck="false">
-        <input type="text" id="recall3" placeholder="Third word..." autocomplete="off" autocorrect="off" spellcheck="false">
-      </div>
+      <div class="recall-inputs" id="recallInputs"></div>
       <div id="recallFeedback" style="display:none; margin-top:16px;">
         <div class="words-display" id="recallResultWords"></div>
       </div>
@@ -597,7 +943,7 @@
         <button class="btn btn-secondary" id="btnNextPart" style="display:none" onclick="startDigitSpan()">Continue to Part 2 →</button>
       </div>
       <div class="annotation">
-        <strong>Scoring:</strong> 1 point per word recalled. Score 0 = high risk flag. Score 1–2 = borderline. Score 3 = passed. In Mini-Cog, this is combined with clock-drawing (we skip clock here for digital feasibility).
+        <strong>Scoring:</strong> 1 point per word recalled <span class="cite" title="Borson et al., 2000">[1]</span>. Score 0 = high risk flag. Score 1–2 = borderline (clock-drawing score determines outcome). Score 3 = passed. Full Mini-Cog combines this with clock-drawing <span class="cite" title="Borson et al., 2006">[5]</span> (omitted here for digital feasibility). Sensitivity 76–99%, specificity 89–96% in primary care <span class="cite" title="Tsoi et al., 2015">[3]</span>.
       </div>
     </div>
   </div>
@@ -617,8 +963,8 @@
         <button class="btn btn-primary" id="btnDigitAction" onclick="handleDigitAction()">Show Sequence →</button>
       </div>
       <div class="annotation" id="digitAnnotation">
-        <strong>Forward Span:</strong> Tests phonological short-term memory. Average adult span: 7±2 digits. Below 5 suggests potential impairment.<br><br>
-        <strong>Backward Span:</strong> Tests working memory manipulation. Average: 5±1. Below 3 is clinically significant.
+        <strong>Forward Span:</strong> Tests phonological short-term memory <span class="cite" title="Baddeley, 2000">[4]</span>. Average adult span: 7±2 digits (Miller, 1956) <span class="cite" title="Miller, 1956">[6]</span>. Below 5 suggests potential impairment <span class="cite" title="Wechsler, 2008">[2]</span>.<br><br>
+        <strong>Backward Span:</strong> Tests working memory manipulation (central executive). Average: 5±1. Below 3 is clinically significant <span class="cite" title="Wechsler, 2008">[2]</span>.
       </div>
     </div>
   </div>
@@ -652,27 +998,235 @@
         <button class="btn btn-primary" onclick="resetAll()">↺ Restart Demo</button>
       </div>
     </div>
+
+    <div class="disclaimer">
+      <strong>Important:</strong> This is an educational proof-of-concept demonstrating how validated open-source assessments work. It is <strong>not</strong> a clinical diagnostic tool. No data is stored. If you have concerns about cognitive health, please consult a qualified clinician. Tests reproduced here are public-domain or freely available research instruments.
+    </div>
+
+    <div class="sources-row" style="padding: 20px 0 0; max-width: none;">
+      <div class="source-chip"><div class="dot"></div>Mini-Cog — Borson et al., 2000; Int J Geriatr Psychiatry</div>
+      <div class="source-chip"><div class="dot"></div>Digit Span — Wechsler, 2008; WAIS-IV</div>
+      <div class="source-chip"><div class="dot"></div>Working Memory Model — Baddeley, 2000; Trends Cogn Sci</div>
+      <div class="source-chip"><div class="dot"></div>Regenstrief Passive Digital Marker — Boustani et al., 2020</div>
+    </div>
+
+    <div class="references">
+      <div class="section-label">References</div>
+      <h3>Sources &amp; Clinical Literature</h3>
+
+      <div class="ref-entry">
+        <span class="ref-id">[1]</span> Borson, S., Scanlan, J., Brush, M., Vitaliano, P., &amp; Dokmak, A. (2000). The Mini-Cog: A cognitive 'vital signs' measure for dementia screening in multi-lingual elderly. <em>International Journal of Geriatric Psychiatry</em>, 15(11), 1021–1027. <a href="https://doi.org/10.1002/1099-1166(200011)15:11%3C1021::AID-GPS234%3E3.0.CO;2-6" target="_blank">doi:10.1002/1099-1166(200011)15:11&lt;1021::AID-GPS234&gt;3.0.CO;2-6</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[2]</span> Wechsler, D. (2008). <em>Wechsler Adult Intelligence Scale — Fourth Edition (WAIS-IV)</em>. San Antonio, TX: Pearson. Digit Span subtest: administration and scoring manual.
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[3]</span> Tsoi, K. K. F., Chan, J. Y. C., Hirai, H. W., Wong, S. Y. S., &amp; Kwok, T. C. Y. (2015). Cognitive tests to detect dementia: A systematic review and meta-analysis. <em>JAMA Internal Medicine</em>, 175(9), 1450–1458. <a href="https://doi.org/10.1001/jamainternmed.2015.2152" target="_blank">doi:10.1001/jamainternmed.2015.2152</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[4]</span> Baddeley, A. (2000). The episodic buffer: A new component of working memory? <em>Trends in Cognitive Sciences</em>, 4(11), 417–423. <a href="https://doi.org/10.1016/S1364-6613(00)01538-2" target="_blank">doi:10.1016/S1364-6613(00)01538-2</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[5]</span> Borson, S., Scanlan, J. M., Watanabe, J., Tu, S. P., &amp; Lessig, M. (2006). Improving identification of cognitive impairment in primary care. <em>International Journal of Geriatric Psychiatry</em>, 21(4), 349–355. <a href="https://doi.org/10.1002/gps.1470" target="_blank">doi:10.1002/gps.1470</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[6]</span> Miller, G. A. (1956). The magical number seven, plus or minus two: Some limits on our capacity for processing information. <em>Psychological Review</em>, 63(2), 81–97. <a href="https://doi.org/10.1037/h0043158" target="_blank">doi:10.1037/h0043158</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[7]</span> Boustani, M., Perkins, A. J., Khandker, R. K., Duong, S., Rundell, S., Zhu, Y., ... &amp; Galvin, J. E. (2020). Passive digital signature for early identification of Alzheimer's disease and related dementia. <em>Journal of the American Geriatrics Society</em>, 68(3), 511–518. <a href="https://doi.org/10.1111/jgs.16218" target="_blank">doi:10.1111/jgs.16218</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[8]</span> Galvin, J. E., Roe, C. M., Powlishta, K. K., Coats, M. A., Muich, S. J., Grant, E., ... &amp; Morris, J. C. (2005). The AD8: A brief informant interview to detect dementia. <em>Neurology</em>, 65(4), 559–564. <a href="https://doi.org/10.1212/01.wnl.0000172958.95282.2a" target="_blank">doi:10.1212/01.wnl.0000172958.95282.2a</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[9]</span> Tariq, S. H., Tumosa, N., Chibnall, J. T., Perry, M. H., &amp; Morley, J. E. (2006). Comparison of the Saint Louis University Mental Status examination and the Mini-Mental State Examination for detecting dementia and mild neurocognitive disorder — A pilot study. <em>American Journal of Geriatric Psychiatry</em>, 14(11), 900–910. <a href="https://doi.org/10.1097/01.JGP.0000221510.33817.86" target="_blank">doi:10.1097/01.JGP.0000221510.33817.86</a>
+      </div>
+
+      <div class="ref-entry">
+        <span class="ref-id">[10]</span> Scharre, D. W., Chang, S. I., Murden, R. A., Lamb, J., Beversdorf, D. Q., Kataki, M., ... &amp; Bornstein, R. A. (2010). Self-administered Gerocognitive Examination (SAGE): A brief cognitive assessment Instrument for mild cognitive impairment (MCI) and early dementia. <em>Alzheimer Disease &amp; Associated Disorders</em>, 24(1), 64–71. <a href="https://doi.org/10.1097/WAD.0b013e3181b03277" target="_blank">doi:10.1097/WAD.0b013e3181b03277</a>
+      </div>
+
+      <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border);">
+        <p style="font-size:12px; color:var(--muted); line-height:1.6;">
+          <strong>Open-source instruments referenced:</strong> Mini-Cog is freely available at <a href="https://mini-cog.com" target="_blank">mini-cog.com</a>. SLUMS is public domain (Saint Louis University). SAGE is freely available from Ohio State University. AD8 is open-source. The Regenstrief passive digital marker is open-source with no licensing fee. MoCA is freely available at <a href="https://mocatest.org" target="_blank">mocatest.org</a> (clinician registration required).
+        </p>
+      </div>
+    </div>
+
   </div>
+
+  </div><!-- /tab-test -->
 
 </main>
 
 <script>
 // ============================================================
+//  GAME CONFIGS
+// ============================================================
+const WORD_SETS_3 = [
+  ["BANANA", "SUNRISE", "CHAIR"],
+  ["LEADER", "SEASON", "TABLE"],
+  ["VILLAGE", "KITCHEN", "BABY"],
+  ["RIVER", "NATION", "FINGER"],
+  ["CAPTAIN", "GARDEN", "PICTURE"],
+  ["DAUGHTER", "HEAVEN", "MOUNTAIN"],
+];
+const WORD_SETS_5 = [
+  ["OCEAN", "HAMMER", "TULIP", "BLANKET", "CHURCH"],
+  ["FOREST", "TRUMPET", "MARBLE", "CANDLE", "SADDLE"],
+  ["CARPET", "LIGHTNING", "PENCIL", "HARBOR", "RABBIT"],
+  ["CASTLE", "MELON", "FEATHER", "SOLDIER", "WINDOW"],
+  ["BASKET", "VOLCANO", "RIBBON", "COMPASS", "BUTTER"],
+];
+
+const CONFIGS = {
+  minicog: {
+    name: 'Mini-Cog',
+    wordSets: WORD_SETS_3,
+    wordCount: 3,
+    distractorTime: 30,
+    distractorOps: ['+', '-'],
+    distractorRange: [5, 24],
+    digitStartLevel: 3,
+    digitFlashMs: 900,
+    digitMaxLevel: 9,
+    backwardStartLevel: 2,
+  },
+  minicogplus: {
+    name: 'Mini-Cog+',
+    wordSets: WORD_SETS_5,
+    wordCount: 5,
+    distractorTime: 45,
+    distractorOps: ['+', '-', '×'],
+    distractorRange: [3, 15],
+    digitStartLevel: 4,
+    digitFlashMs: 700,
+    digitMaxLevel: 12,
+    backwardStartLevel: 3,
+  },
+};
+
+let currentMode = 'minicog';
+let cfg = CONFIGS.minicog;
+
+// ============================================================
 //  STATE
 // ============================================================
-const WORDS = ["BANANA", "SUNRISE", "CHAIR"]; // Standard Mini-Cog category set
+let WORDS = cfg.wordSets[Math.floor(Math.random() * cfg.wordSets.length)];
 let recallScore = 0;
 let distractorCorrect = 0;
 let digitForwardSpan = 0;
 let digitBackwardSpan = 0;
 
 // DIGIT SPAN state
-let dsPhase = 'forward'; // 'forward' | 'backward'
-let dsLevel = 2; // start with 2 digits
+let dsPhase = 'forward';
+let dsLevel = cfg.digitStartLevel;
 let dsTrials = 0;
 let dsConsecutiveFail = 0;
 let dsCurrentSeq = [];
-let dsAction = 'start'; // 'start' | 'showing' | 'input' | 'feedback' | 'done'
+let dsAction = 'start';
+
+// ============================================================
+//  TAB SWITCHING
+// ============================================================
+function switchTab(tabId) {
+  // Reset any running timers
+  clearInterval(distractorTimer);
+  clearInterval(fluencyTimer);
+
+  // Update tab buttons
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.tab-btn');
+  const tabMap = { minicog: 0, minicogplus: 1, fluency: 2, stroop: 3, notes: 5 };
+  if (tabMap[tabId] !== undefined) btns[tabMap[tabId]].classList.add('active');
+
+  // Hide all tab content
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+  const sub = document.getElementById('headerSubtitle');
+  if (tabId === 'minicog' || tabId === 'minicogplus') {
+    currentMode = tabId;
+    cfg = CONFIGS[tabId];
+    document.getElementById('tab-test').classList.add('active');
+    sub.textContent = tabId === 'minicogplus'
+      ? 'Mini-Cog+ · 5 Words · Extended Digit Span'
+      : 'Mini-Cog Word Recall · Digit Span Forward & Backward';
+    updateIntroForMode();
+    resetAll();
+  } else if (tabId === 'fluency') {
+    document.getElementById('tab-fluency').classList.add('active');
+    sub.textContent = 'Verbal Fluency · Category Naming · 60 Seconds';
+    resetFluency();
+  } else if (tabId === 'stroop') {
+    document.getElementById('tab-stroop').classList.add('active');
+    sub.textContent = 'Stroop Test · Color-Word Interference';
+    resetStroop();
+  } else if (tabId === 'trails') {
+    document.getElementById('tab-trails').classList.add('active');
+    sub.textContent = 'Trail Making · Processing Speed + Task Switching';
+  } else if (tabId === 'notes') {
+    document.getElementById('tab-notes').classList.add('active');
+    sub.textContent = 'Deep Research · Cognitive Decline Detection SoTA';
+    loadNotesIfNeeded();
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateIntroForMode() {
+  const isPlus = currentMode === 'minicogplus';
+  document.querySelector('#phase-intro .test-title').innerHTML = isPlus
+    ? 'Mini-Cog+ &nbsp;<span style="font-size:16px; color:var(--sage); font-family:\'DM Mono\',monospace;">NEW GAME+</span>'
+    : 'Memory &amp; Attention<br>Screening Battery';
+  document.querySelector('#phase-intro .test-description').innerHTML = isPlus
+    ? 'Harder variant: 5 words instead of 3, longer distractor with multiplication, digit span starts at 4 with faster flash speed. Same validated methodology, higher difficulty ceiling.'
+    : 'This demo walks through clinically validated, open-source cognitive tasks (The type that scam sites monetize without proper clinical context).  Here we try to show the real mechanism, scoring, and limitations transparently.';
+  document.querySelector('#phase-intro .card-step').textContent = isPlus ? 'Mini-Cog+ — Extended Battery' : "What's included";
+  document.querySelector('#phase-intro .card h3').textContent = isPlus ? 'Extended Assessment' : 'Two-Part Assessment';
+
+  const descP = document.querySelectorAll('#phase-intro .card > p');
+  if (descP[0]) descP[0].innerHTML = isPlus
+    ? `<strong>Part 1 — Word Recall (Extended)</strong><br>
+       ${cfg.wordCount} semantically unrelated words. ${cfg.distractorTime}-second distractor with addition, subtraction, and multiplication. Then free recall.`
+    : `<strong>Part 1 — Word Recall (Mini-Cog)</strong><br>
+       You'll see 3 unrelated words. A short distractor task follows. Then you'll try to recall them. Designed by Borson et al. <span class="cite" title="Borson et al., 2000">[1]</span> at UW, takes ~3 minutes, validated in primary care across 30+ studies <span class="cite" title="Tsoi et al., 2015">[3]</span>.`;
+  if (descP[1]) descP[1].innerHTML = isPlus
+    ? `<strong>Part 2 — Digit Span (Extended)</strong><br>
+       Starts at ${cfg.digitStartLevel} digits with faster flash speed (${cfg.digitFlashMs}ms). Forward and backward. Ceiling raised to ${cfg.digitMaxLevel} digits.`
+    : `<strong>Part 2 — Digit Span (Forward &amp; Backward)</strong><br>
+       Sequences of digits are shown one at a time. You repeat them forward, then in reverse. Tests working memory capacity <span class="cite" title="Baddeley, 2000">[4]</span>. A subcomponent of the WAIS-IV <span class="cite" title="Wechsler, 2008">[2]</span>, widely used in neuropsychology.`;
+
+  // Update step labels
+  const regLabel = document.querySelector('#phase-register .section-label');
+  if (regLabel) regLabel.textContent = isPlus ? 'Part 1 of 2 — Mini-Cog+ · Step 1/3' : 'Part 1 of 2 — Mini-Cog · Step 1/3';
+  const regStep = document.querySelector('#phase-register .card-step');
+  if (regStep) regStep.textContent = isPlus ? `Memorize these ${cfg.wordCount} words` : 'Memorize these three words';
+  const regDesc = document.querySelector('#phase-register .test-description');
+  if (regDesc) regDesc.textContent = isPlus
+    ? `Read the ${cfg.wordCount} words below carefully. You will be asked to recall them later.`
+    : 'Read the three words below carefully. You will be asked to recall them later.';
+
+  const distLabel = document.querySelector('#phase-distractor .section-label');
+  if (distLabel) distLabel.textContent = isPlus ? 'Part 1 of 2 — Mini-Cog+ · Step 2/3' : 'Part 1 of 2 — Mini-Cog · Step 2/3';
+
+  const recLabel = document.querySelector('#phase-recall .section-label');
+  if (recLabel) recLabel.textContent = isPlus ? 'Part 1 of 2 — Mini-Cog+ · Step 3/3' : 'Part 1 of 2 — Mini-Cog · Step 3/3';
+  const recDesc = document.querySelector('#phase-recall .test-description');
+  if (recDesc) recDesc.textContent = isPlus
+    ? `Without any hints, type the ${cfg.wordCount} words you memorized earlier.`
+    : 'Without any hints, type the three words you memorized earlier.';
+
+  const digLabel = document.querySelector('#phase-digit .section-label');
+  if (digLabel) digLabel.textContent = isPlus ? 'Part 2 of 2 — Digit Span+' : 'Part 2 of 2 — Digit Span';
+}
 
 // ============================================================
 //  PHASE NAVIGATION
@@ -696,6 +1250,7 @@ function setPips(activeIdx) {
 //  INTRO → REGISTER
 // ============================================================
 function startTest() {
+  WORDS = cfg.wordSets[Math.floor(Math.random() * cfg.wordSets.length)];
   setPips(1);
   showPhase('register');
   renderWords();
@@ -717,8 +1272,10 @@ function startDistractor() {
   setPips(2);
   showPhase('distractor');
   distractorCorrect = 0;
-  distractorTimeLeft = 30;
+  distractorTimeLeft = cfg.distractorTime;
   document.getElementById('distractorScore').textContent = '0';
+  document.getElementById('distractorTime').textContent = distractorTimeLeft;
+  document.getElementById('distractorBar').style.width = '100%';
   newProblem();
   document.getElementById('distractorInput').focus();
   document.getElementById('distractorInput').addEventListener('keydown', checkDistractorAnswer);
@@ -726,7 +1283,7 @@ function startDistractor() {
   distractorTimer = setInterval(() => {
     distractorTimeLeft--;
     document.getElementById('distractorTime').textContent = distractorTimeLeft;
-    document.getElementById('distractorBar').style.width = (distractorTimeLeft / 30 * 100) + '%';
+    document.getElementById('distractorBar').style.width = (distractorTimeLeft / cfg.distractorTime * 100) + '%';
     if (distractorTimeLeft <= 0) {
       clearInterval(distractorTimer);
       document.getElementById('distractorInput').removeEventListener('keydown', checkDistractorAnswer);
@@ -736,12 +1293,17 @@ function startDistractor() {
 }
 
 function newProblem() {
-  const a = Math.floor(Math.random() * 20) + 5;
-  const b = Math.floor(Math.random() * 20) + 5;
-  const ops = ['+', '-'];
-  const op = ops[Math.floor(Math.random() * ops.length)];
-  currentProblem = { a, b, op, answer: op === '+' ? a + b : a - b };
-  document.getElementById('distractorProblem').textContent = `${a} ${op} ${b} = ?`;
+  const range = cfg.distractorRange;
+  const a = Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
+  const b = Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
+  const op = cfg.distractorOps[Math.floor(Math.random() * cfg.distractorOps.length)];
+  let answer;
+  if (op === '+') answer = a + b;
+  else if (op === '-') answer = a - b;
+  else answer = a * b; // ×
+  const displayOp = op === '×' ? '×' : op;
+  currentProblem = { a, b, op, answer };
+  document.getElementById('distractorProblem').textContent = `${a} ${displayOp} ${b} = ?`;
   document.getElementById('distractorInput').value = '';
 }
 
@@ -762,15 +1324,34 @@ function checkDistractorAnswer(e) {
 function startRecall() {
   setPips(3);
   showPhase('recall');
+
+  // Generate recall inputs dynamically
+  const ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh'];
+  const container = document.getElementById('recallInputs');
+  container.innerHTML = WORDS.map((_, i) =>
+    `<input type="text" id="recall${i+1}" placeholder="${ordinals[i]} word..." autocomplete="off" autocorrect="off" spellcheck="false">`
+  ).join('');
+
   document.getElementById('recall1').focus();
+  container.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const btn = document.getElementById('btnScoreRecall');
+        if (btn.style.display !== 'none') scoreRecall();
+      }
+    });
+  });
+
+  // Reset feedback
+  document.getElementById('recallFeedback').style.display = 'none';
+  document.getElementById('btnScoreRecall').style.display = 'inline-block';
+  document.getElementById('btnNextPart').style.display = 'none';
 }
 
 function scoreRecall() {
-  const inputs = [
-    document.getElementById('recall1').value.trim().toUpperCase(),
-    document.getElementById('recall2').value.trim().toUpperCase(),
-    document.getElementById('recall3').value.trim().toUpperCase(),
-  ];
+  const inputs = WORDS.map((_, i) =>
+    document.getElementById('recall' + (i+1)).value.trim().toUpperCase()
+  );
 
   recallScore = 0;
   const resultWords = document.getElementById('recallResultWords');
@@ -795,7 +1376,7 @@ function scoreRecall() {
 function startDigitSpan() {
   setPips(4);
   dsPhase = 'forward';
-  dsLevel = 3;
+  dsLevel = cfg.digitStartLevel;
   dsTrials = 0;
   dsConsecutiveFail = 0;
   digitForwardSpan = 0;
@@ -867,7 +1448,7 @@ function showDigitSequence() {
       cells[idx].classList.add('revealed');
       cells[idx].style.background = 'var(--sage-dark)';
       idx++;
-      setTimeout(flashNext, 900);
+      setTimeout(flashNext, cfg.digitFlashMs);
     } else {
       // Hide all
       setTimeout(() => {
@@ -885,25 +1466,47 @@ function showDigitSequence() {
 
 function renderDigitInputs() {
   dsAction = 'input';
+  const isBackward = dsPhase === 'backward';
   const row = document.getElementById('digitInputRow');
   row.style.display = 'flex';
   row.innerHTML = dsCurrentSeq.map((_, i) =>
     `<input class="digit-input-cell" type="text" maxlength="1" inputmode="numeric"
-       id="di${i}" oninput="autoAdvanceDigit(${i})">`
+       id="di${i}" oninput="autoAdvanceDigit(${i})" onkeydown="handleDigitKeydown(event, ${i})"
+       ${isBackward && i > 0 ? 'disabled' : ''}
+       style="${isBackward && i > 0 ? 'opacity:0.3; border-color:var(--paper);' : ''}">`
   ).join('');
 
-  const direction = dsPhase === 'forward' ? 'in order' : 'in REVERSE order';
-  document.getElementById('digitStatus').textContent = `Type the digits ${direction}`;
+  if (isBackward) {
+    document.getElementById('digitStatus').innerHTML =
+      `<span style="font-size:16px; font-weight:600; color:var(--red-soft); letter-spacing:0.08em;">⟵ REVERSE ORDER ⟵</span><br>
+       <span style="font-size:12px; color:var(--muted); margin-top:4px; display:inline-block;">Type the LAST digit first, then work backwards. Left to right = reversed sequence.</span>`;
+  } else {
+    document.getElementById('digitStatus').textContent = 'Type the digits in order';
+  }
   document.getElementById('btnDigitAction').textContent = 'Submit Answer →';
   document.getElementById('btnDigitAction').disabled = false;
   document.getElementById('di0').focus();
+}
+
+function handleDigitKeydown(e, i) {
+  if (e.key === 'Enter') {
+    scoreDigitSpan();
+  }
 }
 
 function autoAdvanceDigit(i) {
   const el = document.getElementById('di' + i);
   if (el.value.length === 1 && !isNaN(el.value)) {
     const next = document.getElementById('di' + (i + 1));
-    if (next) next.focus();
+    if (next) {
+      // In backward mode, unlock the next input sequentially
+      if (dsPhase === 'backward') {
+        next.disabled = false;
+        next.style.opacity = '1';
+        next.style.borderColor = '';
+      }
+      next.focus();
+    }
   }
 }
 
@@ -932,19 +1535,35 @@ function scoreDigitSpan() {
     dsLevel++;
     dsConsecutiveFail = 0;
 
-    if (dsLevel > 9) {
+    if (dsLevel > cfg.digitMaxLevel) {
       advancePhaseOrFinish();
     } else {
       setTimeout(updateDigitUI, 1200);
     }
   } else {
     dsConsecutiveFail++;
-    document.getElementById('digitStatus').textContent = `✗ Incorrect. ${dsConsecutiveFail >= 2 ? 'Phase complete.' : 'Retry same level.'}`;
+    document.getElementById('digitStatus').innerHTML =
+      `✗ Incorrect. ${dsConsecutiveFail >= 2 ? 'Phase complete.' : 'Retry same level.'}`;
+
+    // Show correct vs wrong: green for correct digits, red for wrong guesses
+    const seqEl = document.getElementById('digitSequence');
+    seqEl.innerHTML = expected.map((d, i) => {
+      const got = inputs[i];
+      const isRight = d === got;
+      if (isRight) {
+        return `<div class="digit-cell revealed" style="background:var(--sage-dark); color:var(--cream);">${d}</div>`;
+      } else {
+        return `<div class="digit-cell revealed" style="background:var(--red-soft); color:var(--cream); position:relative;">${d}<span style="position:absolute; bottom:-22px; font-size:12px; font-family:'DM Mono',monospace; color:var(--red-soft);">${isNaN(got) ? '–' : got}</span></div>`;
+      }
+    }).join('');
+
+    // Hide the input row so only the comparison shows
+    document.getElementById('digitInputRow').style.display = 'none';
 
     if (dsConsecutiveFail >= 2) {
-      setTimeout(advancePhaseOrFinish, 1200);
+      setTimeout(advancePhaseOrFinish, 2400);
     } else {
-      setTimeout(updateDigitUI, 1400);
+      setTimeout(updateDigitUI, 2400);
     }
   }
 }
@@ -952,11 +1571,11 @@ function scoreDigitSpan() {
 function advancePhaseOrFinish() {
   if (dsPhase === 'forward') {
     dsPhase = 'backward';
-    dsLevel = 2;
+    dsLevel = cfg.backwardStartLevel;
     dsTrials = 0;
     dsConsecutiveFail = 0;
     document.getElementById('digitAnnotation').innerHTML =
-      `<strong>Backward Span:</strong> You must reverse the sequence mentally before answering. This taxes the central executive of working memory — the component most sensitive to early cognitive decline.`;
+      `<strong>⟵ Backward Span:</strong> You must reverse the entire sequence in your head before typing. If you saw 3-7-2, you type 2-7-3. This taxes the central executive of working memory — the component most sensitive to early cognitive decline. Inputs unlock left-to-right to prevent right-to-left entry (which would bypass the mental reversal).`;
     updateDigitUI();
   } else {
     showResults();
@@ -971,24 +1590,36 @@ function showResults() {
   showPhase('results');
 
   // Score interpretation
-  const miniCogInterp = recallScore === 3
-    ? 'Passed — No concern flagged'
-    : recallScore === 2
-    ? 'Borderline — 2/3 words recalled'
-    : recallScore === 1
-    ? 'Low — 1/3 words recalled'
-    : 'Flag — 0/3 words recalled';
+  const wc = cfg.wordCount;
+  const recallPct = recallScore / wc;
+  const miniCogInterp = recallPct === 1
+    ? 'Passed — All words recalled'
+    : recallPct >= 0.6
+    ? `Borderline — ${recallScore}/${wc} words recalled`
+    : recallPct >= 0.3
+    ? `Low — ${recallScore}/${wc} words recalled`
+    : `Flag — ${recallScore}/${wc} words recalled`;
 
-  const fwdNorm = digitForwardSpan >= 6 ? 'Within normal range' : digitForwardSpan >= 4 ? 'Below average' : 'Low — warrants evaluation';
-  const bkwNorm = digitBackwardSpan >= 4 ? 'Within normal range' : digitBackwardSpan >= 3 ? 'Below average' : 'Low — warrants evaluation';
+  const fwdNorm = digitForwardSpan >= 9 ? 'Superior — effective chunking/grouping strategies'
+    : digitForwardSpan >= 8 ? 'High average — above-typical phonological capacity'
+    : digitForwardSpan >= 7 ? 'Average — typical adult capacity'
+    : digitForwardSpan >= 6 ? 'Low average — functional but below mean'
+    : digitForwardSpan >= 5 ? 'Below average — limited phonological loop capacity'
+    : 'Low — warrants clinical evaluation';
+  const bkwNorm = digitBackwardSpan >= 7 ? 'Superior — strong central executive function'
+    : digitBackwardSpan >= 6 ? 'High average — effective working memory manipulation'
+    : digitBackwardSpan >= 5 ? 'Average — typical manipulation capacity'
+    : digitBackwardSpan >= 4 ? 'Low average — adequate but below mean'
+    : digitBackwardSpan >= 3 ? 'Below average — limited executive manipulation'
+    : 'Low — warrants clinical evaluation';
 
   document.getElementById('scoreboard').innerHTML = `
     <div class="score-row">
       <div>
-        <div class="score-label">Mini-Cog Word Recall</div>
+        <div class="score-label">${cfg.name} Word Recall</div>
         <div class="score-interp">${miniCogInterp}</div>
       </div>
-      <div class="score-value">${recallScore} / 3</div>
+      <div class="score-value">${recallScore} / ${wc}</div>
     </div>
     <div class="score-row">
       <div>
@@ -1011,39 +1642,813 @@ function showResults() {
       </div>
       <div class="score-value">${digitBackwardSpan}</div>
     </div>
+    <div class="score-row">
+      <div>
+        <div class="score-label">Forward − Backward Gap</div>
+        <div class="score-interp">${(digitForwardSpan - digitBackwardSpan) <= 1 ? 'Minimal gap — efficient executive processing' : (digitForwardSpan - digitBackwardSpan) <= 2 ? 'Typical gap — normal executive overhead' : 'Large gap — executive manipulation more effortful than storage'}</div>
+      </div>
+      <div class="score-value">${digitForwardSpan - digitBackwardSpan}</div>
+    </div>
   `;
 
   const details = document.getElementById('detailItems');
   details.innerHTML = `
     <div class="result-item">
-      <div class="result-name">Word Recall (Mini-Cog)</div>
-      <div class="result-bar-wrap"><div class="result-bar" style="width:${(recallScore/3*100)}%"></div></div>
-      <div class="result-detail">${recallScore}/3 words · ${(recallScore/3*100).toFixed(0)}%</div>
+      <div class="result-name">Word Recall (${cfg.name})</div>
+      <div class="result-bar-wrap"><div class="result-bar" style="width:${(recallScore/wc*100)}%"></div></div>
+      <div class="result-detail">${recallScore}/${wc} words · ${(recallScore/wc*100).toFixed(0)}%</div>
       <div style="font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5;">
-        Clinical cut-off: ≤2 triggers further evaluation. Designed to detect free recall deficit — an early marker in Alzheimer's pathology.
+        ${wc === 3 ? 'Clinical cut-off: ≤2 triggers further evaluation [1]. ' : `${recallScore}/${wc} recalled. `}Designed to detect free recall deficit — an early marker in Alzheimer's pathology.${wc === 3 ? ' Sensitivity 76–99%, specificity 89–96% across populations [3].' : ' Extended version — normative data for 5-word recall is research-grade.'}
       </div>
     </div>
     <div class="result-item">
       <div class="result-name">Digit Span Forward</div>
-      <div class="result-bar-wrap"><div class="result-bar" style="width:${Math.min(digitForwardSpan/9*100,100)}%"></div></div>
-      <div class="result-detail">Span of ${digitForwardSpan} · Normative mean: 7±2</div>
+      <div class="result-bar-wrap"><div class="result-bar" style="width:${Math.min(digitForwardSpan/cfg.digitMaxLevel*100,100)}%"></div></div>
+      <div class="result-detail">Span of ${digitForwardSpan} · Normative mean: 7±2 (Miller, 1956 [6]) · WAIS-IV norms [2]</div>
+      <div style="font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5;">
+        ${digitForwardSpan >= 8 ? 'Scores of 8–9+ suggest effective chunking strategies (grouping digits into meaningful units), which augments raw phonological loop capacity. This strategic component is itself a marker of strong executive function.' :
+          digitForwardSpan >= 6 ? 'Scores of 6–7 reflect typical phonological loop capacity without significant strategic augmentation. Cowan (2001) argues the "true" capacity is closer to 4±1 pure chunks — higher spans indicate implicit rehearsal or grouping.' :
+          'Scores below 6 suggest limited phonological loop capacity. Consider factors: fatigue, attention, test anxiety. A single score is not diagnostic — patterns across repeated testing are more informative.'}
+      </div>
     </div>
     <div class="result-item">
       <div class="result-name">Digit Span Backward</div>
-      <div class="result-bar-wrap"><div class="result-bar" style="width:${Math.min(digitBackwardSpan/7*100,100)}%"></div></div>
-      <div class="result-detail">Span of ${digitBackwardSpan} · Normative mean: 5±1</div>
+      <div class="result-bar-wrap"><div class="result-bar" style="width:${Math.min(digitBackwardSpan/(cfg.digitMaxLevel-2)*100,100)}%"></div></div>
+      <div class="result-detail">Span of ${digitBackwardSpan} · Normative mean: 5±1 · Tests central executive (Baddeley, 2000 [4])</div>
+      <div style="font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5;">
+        ${digitBackwardSpan >= 6 ? 'Backward span ≥6 indicates strong working memory manipulation. The forward-backward gap matters: a small gap (≤1) suggests the central executive handles reversal efficiently. A large gap (≥3) may indicate executive processing weakness even with adequate storage.' :
+          digitBackwardSpan >= 4 ? 'Backward span of 4–5 is typical. The key clinical metric is the forward-minus-backward difference — typically ~2. If your gap is larger, it may suggest the manipulation component (central executive) is more taxed than storage alone.' :
+          'Backward span below 4 warrants attention. This task requires simultaneously holding digits and reversing their order — a dual demand on storage and executive processing. Low backward with normal forward specifically implicates the central executive.'}
+      </div>
     </div>
   `;
 }
 
+// ============================================================
+//  VERBAL FLUENCY
+// ============================================================
+let fluencyWords = [];
+let fluencyTimer = null;
+let fluencyTimeLeft = 60;
+let fluencyCategory = '';
+let fluencyStartTime = null;
+let fluencyTimestamps = []; // track when each word was entered
+
+// Levenshtein distance for fuzzy spelling
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  return dp[m][n];
+}
+
+// Comprehensive animal dictionary — all animal kingdom: mammals, birds, fish, reptiles, amphibians, insects, arachnids, crustaceans, mollusks, worms, etc.
+const ANIMAL_LIST = new Set([
+  // mammals - common
+  'dog','cat','mouse','rat','horse','cow','pig','sheep','goat','rabbit','deer','bear','wolf','fox','lion','tiger',
+  'elephant','giraffe','zebra','monkey','ape','gorilla','chimpanzee','chimp','orangutan','baboon','hippo','hippopotamus',
+  'rhino','rhinoceros','buffalo','bison','moose','elk','antelope','gazelle','camel','llama','alpaca','donkey','mule',
+  'pony','stallion','mare','colt','foal','bull','calf','lamb','ram','ewe','boar','sow','piglet','kitten','puppy',
+  'hamster','gerbil','guinea pig','ferret','chinchilla','hedgehog','porcupine','squirrel','chipmunk','beaver','otter',
+  'mink','weasel','stoat','badger','skunk','raccoon','opossum','possum','armadillo','sloth','anteater','pangolin',
+  'platypus','kangaroo','koala','wallaby','wombat','echidna','bat','mole','shrew','lemur','gibbon','mandrill',
+  'cheetah','leopard','jaguar','panther','cougar','puma','lynx','bobcat','hyena','jackal','coyote','dingo',
+  'whale','dolphin','porpoise','seal','sea lion','walrus','manatee','dugong','narwhal','orca',
+  'panda','red panda','polar bear','grizzly','brown bear','black bear',
+  'wildebeest','impala','kudu','oryx','okapi','tapir','warthog','mongoose','meerkat','civet',
+  'yak','ox','steer','heifer','reindeer','caribou','chamois','ibex',
+  'hare','pika','capybara','agouti','nutria','marmot','prairie dog','groundhog','woodchuck',
+  'wolverine','fisher','marten','sable','ermine',
+  // birds
+  'bird','eagle','hawk','falcon','owl','vulture','condor','kite','osprey','harrier',
+  'chicken','hen','rooster','turkey','duck','goose','swan','pelican','flamingo','stork','heron','crane','egret',
+  'sparrow','robin','bluejay','jay','cardinal','finch','canary','budgie','parakeet','parrot','macaw','cockatoo','cockatiel',
+  'pigeon','dove','crow','raven','magpie','starling','blackbird','thrush','nightingale','wren','swallow','swift','martin',
+  'penguin','albatross','puffin','seagull','gull','tern','cormorant','gannet',
+  'woodpecker','toucan','hornbill','kingfisher','hummingbird','bee-eater',
+  'ostrich','emu','cassowary','kiwi','peacock','pheasant','quail','grouse','partridge',
+  'ibis','spoonbill','avocet','plover','sandpiper','curlew','snipe','lapwing','oystercatcher',
+  'cuckoo','roadrunner','loon','grebe','rail','moorhen','coot',
+  'mynah','oriole','tanager','bunting','warbler','flycatcher','nuthatch','chickadee','tit','goldfinch',
+  // reptiles
+  'snake','cobra','python','boa','viper','rattlesnake','mamba','adder','asp','anaconda','copperhead','coral snake',
+  'lizard','gecko','iguana','chameleon','skink','monitor','komodo dragon','anole','basilisk','bearded dragon',
+  'crocodile','alligator','caiman','gavial','gharial',
+  'turtle','tortoise','terrapin','sea turtle',
+  'tuatara',
+  // amphibians
+  'frog','toad','newt','salamander','axolotl','caecilian','tree frog','bullfrog','tadpole',
+  // fish
+  'fish','salmon','trout','bass','tuna','cod','herring','sardine','anchovy','mackerel','swordfish','marlin',
+  'shark','hammerhead','ray','stingray','manta ray','skate',
+  'catfish','carp','koi','goldfish','pike','perch','walleye','bluegill','sunfish','crappie',
+  'eel','moray','lamprey','sturgeon','paddlefish','gar',
+  'clownfish','angelfish','pufferfish','blowfish','seahorse','barracuda','grouper','snapper','flounder','halibut','sole',
+  'piranha','tetra','guppy','betta','molly','platy','oscar','discus','cichlid',
+  'minnow','dace','chub','roach','bream','rudd',
+  // insects
+  'ant','bee','wasp','hornet','fly','mosquito','gnat','midge','dragonfly','damselfly',
+  'butterfly','moth','caterpillar','beetle','ladybug','ladybird','weevil','firefly','lightning bug',
+  'grasshopper','cricket','locust','katydid','mantis','praying mantis','stick insect','walking stick',
+  'cockroach','roach','termite','flea','louse','lice','bedbug','aphid','cicada',
+  'earwig','silverfish','mayfly','stonefly','caddisfly','lacewing','sawfly',
+  'horsefly','deerfly','blowfly','housefly','fruit fly','botfly',
+  'bumblebee','honeybee','yellowjacket','carpenter bee','mason bee',
+  'dung beetle','stag beetle','rhinoceros beetle','scarab','june bug',
+  // arachnids
+  'spider','tarantula','black widow','brown recluse','wolf spider','garden spider','jumping spider',
+  'scorpion','tick','mite','harvestman','daddy longlegs',
+  // crustaceans
+  'crab','lobster','shrimp','prawn','crayfish','crawfish','crawdad','barnacle','krill',
+  'hermit crab','king crab','horseshoe crab','woodlouse','pill bug','isopod',
+  // mollusks
+  'snail','slug','clam','mussel','oyster','scallop','squid','octopus','cuttlefish','nautilus',
+  'abalone','conch','whelk','limpet','periwinkle',
+  // other invertebrates
+  'worm','earthworm','leech','tapeworm','roundworm','flatworm','hookworm',
+  'jellyfish','starfish','sea star','sea urchin','sea cucumber','coral','anemone','sponge',
+  'centipede','millipede',
+  // misc / colloquial
+  'bug','critter','beast','creature','animal','vermin','pest',
+  'mustang','bronco','palomino','clydesdale','thoroughbred','appaloosa',
+  'rottweiler','labrador','retriever','poodle','bulldog','dalmatian','beagle','collie','shepherd','terrier','spaniel','husky','greyhound','chihuahua','dachshund','pug','mastiff','boxer','doberman',
+  'siamese','persian','tabby','calico','maine coon','bengal','ragdoll','sphynx',
+  'tadpole','larva','grub','maggot','nymph','pupa','chrysalis',
+]);
+
+// Fuzzy match: find closest animal within edit distance
+function findAnimalMatch(word) {
+  if (ANIMAL_LIST.has(word)) return { match: word, exact: true };
+  // Try edit distance 1 first, then 2
+  for (const dist of [1, 2]) {
+    for (const animal of ANIMAL_LIST) {
+      if (Math.abs(animal.length - word.length) > dist) continue;
+      if (levenshtein(word, animal) <= dist) return { match: animal, exact: false };
+    }
+  }
+  return null;
+}
+
+let fluencyUnverified = []; // track words not in dictionary
+
+const FLUENCY_CATEGORIES = {
+  animals: { label: 'Animals', type: 'semantic', prompt: 'Name every animal you can think of' },
+  fruits: { label: 'Fruits & Vegetables', type: 'semantic', prompt: 'Name every fruit or vegetable you can think of' },
+  tools: { label: 'Tools & Utensils', type: 'semantic', prompt: 'Name every tool or utensil you can think of' },
+  clothing: { label: 'Clothing', type: 'semantic', prompt: 'Name every type of clothing you can think of' },
+  supermarket: { label: 'Supermarket Items', type: 'semantic', prompt: 'Name everything you might find in a supermarket' },
+  F: { label: 'Letter F', type: 'phonemic', prompt: 'Name every word that starts with F' },
+  A: { label: 'Letter A', type: 'phonemic', prompt: 'Name every word that starts with A' },
+  S: { label: 'Letter S', type: 'phonemic', prompt: 'Name every word that starts with S' },
+};
+
+function startFluency(category) {
+  fluencyCategory = category;
+  fluencyWords = [];
+  fluencyTimestamps = [];
+  fluencyUnverified = [];
+  fluencyTimeLeft = 60;
+  const cat = FLUENCY_CATEGORIES[category];
+
+  document.getElementById('fluency-intro').style.display = 'none';
+  document.getElementById('fluency-results').style.display = 'none';
+  document.getElementById('fluency-active').style.display = 'block';
+
+  document.getElementById('fluencyModeLabel').textContent =
+    `${cat.type === 'semantic' ? 'Semantic' : 'Phonemic'} Fluency · ${cat.label}`;
+  document.getElementById('fluencyTitle').textContent = cat.prompt;
+  document.getElementById('fluencyDesc').textContent =
+    cat.type === 'phonemic'
+      ? 'Type one word at a time and press Enter. No proper nouns, no repeated word forms (run/running = 1). 60 seconds.'
+      : 'Type one word at a time and press Enter. Go as fast as you can — 60 seconds.';
+  document.getElementById('fluencyTimer').textContent = 'Time remaining: 60s';
+  document.getElementById('fluencyBar').style.width = '100%';
+  document.getElementById('fluencyCount').textContent = '0';
+  document.getElementById('fluencyWordList').innerHTML = '';
+  document.getElementById('fluencyFeedback').textContent = '';
+  document.getElementById('fluencyInput').value = '';
+  document.getElementById('fluencyInput').disabled = false;
+  document.getElementById('fluencyInput').focus();
+
+  // Attach enter handler
+  const input = document.getElementById('fluencyInput');
+  input.onkeydown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addFluencyWord();
+    }
+  };
+
+  fluencyStartTime = Date.now();
+  fluencyTimer = setInterval(() => {
+    fluencyTimeLeft--;
+    document.getElementById('fluencyTimer').textContent = `Time remaining: ${fluencyTimeLeft}s`;
+    document.getElementById('fluencyBar').style.width = (fluencyTimeLeft / 60 * 100) + '%';
+    if (fluencyTimeLeft <= 10) {
+      document.getElementById('fluencyTimer').style.color = 'var(--red-soft)';
+    }
+    if (fluencyTimeLeft <= 0) {
+      clearInterval(fluencyTimer);
+      endFluency();
+    }
+  }, 1000);
+}
+
+function addFluencyWord() {
+  const input = document.getElementById('fluencyInput');
+  const word = input.value.trim().toLowerCase();
+  input.value = '';
+
+  if (!word) return;
+
+  const feedback = document.getElementById('fluencyFeedback');
+  const cat = FLUENCY_CATEGORIES[fluencyCategory];
+
+  // Check for phonemic rule: must start with the right letter
+  if (cat.type === 'phonemic') {
+    if (!word.startsWith(fluencyCategory.toLowerCase())) {
+      feedback.textContent = `"${word}" doesn't start with ${fluencyCategory}. Try again.`;
+      return;
+    }
+  }
+
+  // Check for duplicates
+  if (fluencyWords.includes(word)) {
+    feedback.textContent = `"${word}" already listed — perseveration detected.`;
+    return;
+  }
+
+  // Check for similar stems (phonemic mode)
+  if (cat.type === 'phonemic') {
+    const stem = word.replace(/(ing|ed|s|er|est|ly|tion|ment)$/, '');
+    const hasSimilar = fluencyWords.some(w => {
+      const wStem = w.replace(/(ing|ed|s|er|est|ly|tion|ment)$/, '');
+      return stem.length >= 3 && wStem === stem && w !== word;
+    });
+    if (hasSimilar) {
+      feedback.textContent = `"${word}" shares a root with an existing word. Different word forms count as 1.`;
+      return;
+    }
+  }
+
+  // Animal validation with fuzzy spelling
+  let chipColor = 'var(--sage)';
+  let verified = true;
+  if (fluencyCategory === 'animals') {
+    const result = findAnimalMatch(word);
+    if (result) {
+      if (!result.exact) {
+        feedback.innerHTML = `<span style="color:var(--sage-dark);">Accepted as "${result.match}" (spelling corrected)</span>`;
+        // Check if corrected form is a duplicate
+        if (fluencyWords.includes(result.match)) {
+          feedback.textContent = `"${result.match}" already listed (spelling variant).`;
+          return;
+        }
+      } else {
+        feedback.textContent = '';
+      }
+    } else {
+      // Not recognized — accept but flag
+      feedback.innerHTML = `<span style="color:var(--gold);">"${word}" not in dictionary — accepted but unverified</span>`;
+      chipColor = 'var(--gold)';
+      verified = false;
+      fluencyUnverified.push(word);
+    }
+    // Use the corrected form if available
+    const finalWord = result ? result.match : word;
+    if (result && fluencyWords.includes(finalWord)) {
+      feedback.textContent = `"${finalWord}" already listed.`;
+      return;
+    }
+    fluencyWords.push(finalWord);
+  } else {
+    feedback.textContent = '';
+    fluencyWords.push(word);
+  }
+
+  fluencyTimestamps.push(Date.now() - fluencyStartTime);
+  document.getElementById('fluencyCount').textContent = fluencyWords.length;
+
+  // Add word chip
+  const chip = document.createElement('span');
+  chip.style.cssText = `background:${chipColor}; color:var(--cream); font-family:"DM Mono",monospace; font-size:12px; padding:4px 10px; letter-spacing:0.04em;`;
+  chip.textContent = fluencyWords[fluencyWords.length - 1];
+  if (!verified) chip.title = 'Not in dictionary — unverified';
+  document.getElementById('fluencyWordList').appendChild(chip);
+}
+
+function endFluency() {
+  document.getElementById('fluencyInput').disabled = true;
+  document.getElementById('fluencyTimer').textContent = 'Time\'s up!';
+  document.getElementById('fluencyTimer').style.color = '';
+
+  setTimeout(showFluencyResults, 800);
+}
+
+function showFluencyResults() {
+  document.getElementById('fluency-active').style.display = 'none';
+  document.getElementById('fluency-results').style.display = 'block';
+
+  const count = fluencyWords.length;
+  const cat = FLUENCY_CATEGORIES[fluencyCategory];
+  const isSemantic = cat.type === 'semantic';
+
+  // Scoring interpretation
+  let interp, interpDetail;
+  if (isSemantic) {
+    interp = count >= 22 ? 'Above average — strong semantic retrieval'
+      : count >= 18 ? 'Average — typical for adults under 60'
+      : count >= 15 ? 'Low average — may reflect age-related slowing'
+      : count >= 11 ? 'Below average — warrants further evaluation'
+      : 'Low — significant retrieval difficulty';
+    interpDetail = count >= 22
+      ? 'Scores above 22 suggest efficient clustering (grouping by subcategory) and switching (jumping between clusters) strategies. This dual-process efficiency is a hallmark of intact executive function and rich semantic networks.'
+      : count >= 18
+      ? 'Scores of 18–21 are within the normal range for most adults. Performance may vary by age: this score is average for age 50–59, above average for 70+.'
+      : count >= 15
+      ? 'Scores of 15–17 are below the mean but within 1 SD for ages 60–79. Consider age and education — animal naming is more sensitive to age (23.4% of variance) than education (13.6%).'
+      : count >= 11
+      ? 'Scores of 11–14 fall more than 1 SD below the mean for most age groups. Common patterns: difficulty switching between subcategories, reliance on a single cluster (e.g., only pets), or early "empty" periods with no output.'
+      : 'Scores below 11 are clinically significant across all age groups. Typical AD pattern: reduced total output, perseveration, and loss of less typical exemplars (e.g., "yak" lost before "dog").';
+  } else {
+    const perLetterAvg = 13; // typical per-letter average
+    interp = count >= 16 ? 'Above average — strong lexical access'
+      : count >= 12 ? 'Average — typical phonemic retrieval'
+      : count >= 8 ? 'Low average — possible retrieval difficulty'
+      : count >= 5 ? 'Below average — warrants further evaluation'
+      : 'Low — significant lexical access difficulty';
+    interpDetail = count >= 16
+      ? 'High phonemic fluency suggests strong lexical access and good frontal lobe function. Education is the strongest predictor (18.6% of variance) for letter fluency.'
+      : count >= 12
+      ? 'Scores of 12–15 per letter are within the normal range. The FAS protocol totals all three letters — your per-letter score would contribute to that total (typical combined: 36–44 for adults under 60).'
+      : count >= 8
+      ? 'Scores of 8–11 per letter are below average. Consider: phonemic fluency is harder than semantic — it requires searching by sound rather than meaning, which demands more frontal executive resources.'
+      : 'Low phonemic fluency may reflect frontal lobe dysfunction or limited educational exposure. Unlike semantic fluency (which degrades in AD), phonemic fluency is more affected by frontal lesions and vascular dementia.';
+  }
+
+  // Temporal analysis: words per 15-second quarter
+  const quarters = [0, 0, 0, 0];
+  fluencyTimestamps.forEach(t => {
+    const q = Math.min(3, Math.floor(t / 15000));
+    quarters[q]++;
+  });
+
+  document.getElementById('fluencyScoreboard').innerHTML = `
+    <div class="score-row">
+      <div>
+        <div class="score-label">${cat.label} — ${isSemantic ? 'Semantic' : 'Phonemic'} Fluency</div>
+        <div class="score-interp">${interp}</div>
+      </div>
+      <div class="score-value">${count}</div>
+    </div>
+    <div class="score-row">
+      <div>
+        <div class="score-label">Output Rate</div>
+        <div class="score-interp">Q1: ${quarters[0]} · Q2: ${quarters[1]} · Q3: ${quarters[2]} · Q4: ${quarters[3]} (per 15s)</div>
+      </div>
+      <div class="score-value">${(count / 60 * 60).toFixed(0)}/min</div>
+    </div>
+    ${fluencyCategory === 'animals' && fluencyUnverified.length > 0 ? `
+    <div class="score-row">
+      <div>
+        <div class="score-label">Verification</div>
+        <div class="score-interp">${count - fluencyUnverified.length} verified · ${fluencyUnverified.length} unverified (${fluencyUnverified.join(', ')})</div>
+      </div>
+      <div class="score-value" style="font-size:18px;">${count - fluencyUnverified.length} <span style="font-size:14px; color:var(--gold);">+ ${fluencyUnverified.length}?</span></div>
+    </div>` : ''}
+  `;
+
+  // Word chips — color-code verified (green) vs unverified (gold)
+  const resultWords = document.getElementById('fluencyResultWords');
+  resultWords.innerHTML = fluencyWords.map((w, i) => {
+    const sec = Math.floor(fluencyTimestamps[i] / 1000);
+    const isUnverified = fluencyUnverified.includes(w);
+    const bg = isUnverified ? 'var(--gold)' : 'var(--sage)';
+    return `<span style="background:${bg}; color:var(--cream); font-family:'DM Mono',monospace; font-size:11px; padding:4px 8px;" title="${isUnverified ? 'unverified — ' : ''}at ${sec}s">${w}</span>`;
+  }).join('');
+
+  // Stats
+  document.getElementById('fluencyResultStats').innerHTML = `
+    <strong>Temporal pattern:</strong> First 15s: ${quarters[0]} words · Second 15s: ${quarters[1]} · Third 15s: ${quarters[2]} · Final 15s: ${quarters[3]}<br>
+    ${quarters[0] > quarters[3] * 2 ? '<em>Front-loaded output — typical healthy pattern. Most retrieval happens in the first 15–30 seconds when high-frequency items are accessed first.</em>' :
+      quarters[0] <= quarters[3] ? '<em>Unusual pattern — output did not decrease over time. This could indicate a slow-start strategy or high sustained retrieval capacity.</em>' :
+      '<em>Gradual decline across quarters — a normal pattern reflecting progressive depletion of accessible items within each semantic cluster.</em>'}
+  `;
+
+  // Analysis
+  document.getElementById('fluencyAnalysis').innerHTML = `
+    <p>${interpDetail}</p>
+    <p style="margin-top:12px;"><strong>Two processes measured:</strong></p>
+    <p><strong>1. Clustering</strong> — generating words within a subcategory (e.g., "dog, cat, hamster" = pet cluster). Reflects semantic memory integrity.</p>
+    <p><strong>2. Switching</strong> — jumping between subcategories (pets → ocean animals → insects). Reflects executive function and cognitive flexibility.</p>
+    <p style="margin-top:8px; font-size:13px; color:var(--muted);">
+      ${isSemantic ? 'In Alzheimer\'s disease, clustering degrades first (semantic network breakdown). In frontal lobe dysfunction, switching degrades first (executive impairment with intact knowledge).' :
+      'Phonemic fluency relies more on frontal/executive function than semantic memory. Low phonemic + normal semantic = possible frontal dysfunction. Low semantic + normal phonemic = possible temporal/AD pathology.'}
+    </p>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+//  STROOP TEST
+// ============================================================
+const STROOP_COLORS = {
+  red:    { bg: '#D94040', border: '#B82020', text: '#D94040' },
+  blue:   { bg: '#3070CC', border: '#1850A0', text: '#3070CC' },
+  green:  { bg: '#2E8B57', border: '#1A6B3A', text: '#2E8B57' },
+  yellow: { bg: '#C8A820', border: '#A08010', text: '#C8A820' },
+  purple: { bg: '#8855BB', border: '#6835A0', text: '#8855BB' },
+};
+const STROOP_COLOR_NAMES = Object.keys(STROOP_COLORS);
+const STROOP_NEUTRAL_WORDS = ['TABLE','HOUSE','CLOUD','PLANT','CHAIR','STONE','RIVER','BREAD','CLOCK','MONTH'];
+const STROOP_PHASES = [
+  { id: 'congruent', label: 'Congruent (Warm-up)', trials: 20 },
+  { id: 'neutral',   label: 'Neutral',              trials: 20 },
+  { id: 'incongruent', label: 'Incongruent',        trials: 20 },
+];
+
+let stroopPhase = 0;
+let stroopTrial = 0;
+let stroopResults = { congruent: [], neutral: [], incongruent: [] };
+let stroopTrialStart = 0;
+let stroopActive = false;
+
+function startStroop() {
+  stroopPhase = 0;
+  stroopTrial = 0;
+  stroopResults = { congruent: [], neutral: [], incongruent: [] };
+  document.getElementById('stroop-intro').style.display = 'none';
+  document.getElementById('stroop-results').style.display = 'none';
+  document.getElementById('stroop-active').style.display = 'block';
+  renderStroopButtons();
+  nextStroopTrial();
+}
+
+function renderStroopButtons() {
+  const container = document.getElementById('stroopButtons');
+  container.innerHTML = STROOP_COLOR_NAMES.map(c => {
+    const col = STROOP_COLORS[c];
+    return `<button class="stroop-btn" id="stroop-btn-${c}"
+      style="background:${col.bg}; border-color:${col.border}; color:white;"
+      onclick="answerStroop('${c}')">${c}</button>`;
+  }).join('');
+}
+
+function nextStroopTrial() {
+  const phase = STROOP_PHASES[stroopPhase];
+  document.getElementById('stroopPhaseLabel').textContent = `Phase ${stroopPhase + 1} of 3 — ${phase.label}`;
+  document.getElementById('stroopTrialCount').textContent = `Trial ${stroopTrial + 1} / ${phase.trials}`;
+  document.getElementById('stroopFeedback').textContent = '';
+
+  // Enable buttons
+  STROOP_COLOR_NAMES.forEach(c => {
+    const btn = document.getElementById('stroop-btn-' + c);
+    if (btn) btn.disabled = false;
+  });
+
+  // Generate stimulus
+  const inkColor = STROOP_COLOR_NAMES[Math.floor(Math.random() * STROOP_COLOR_NAMES.length)];
+  let word, type;
+
+  if (phase.id === 'congruent') {
+    word = inkColor.toUpperCase();
+    type = 'congruent';
+  } else if (phase.id === 'neutral') {
+    word = STROOP_NEUTRAL_WORDS[Math.floor(Math.random() * STROOP_NEUTRAL_WORDS.length)];
+    type = 'neutral';
+  } else {
+    // Incongruent: word must differ from ink color
+    let wordColor;
+    do { wordColor = STROOP_COLOR_NAMES[Math.floor(Math.random() * STROOP_COLOR_NAMES.length)]; }
+    while (wordColor === inkColor);
+    word = wordColor.toUpperCase();
+    type = 'incongruent';
+  }
+
+  const stim = document.getElementById('stroopStimulus');
+  stim.textContent = word;
+  stim.style.color = STROOP_COLORS[inkColor].text;
+  stim.dataset.correctColor = inkColor;
+  stim.dataset.type = type;
+  stim.dataset.word = word;
+
+  stroopActive = true;
+  stroopTrialStart = performance.now();
+}
+
+function answerStroop(chosenColor) {
+  if (!stroopActive) return;
+  stroopActive = false;
+
+  const rt = Math.round(performance.now() - stroopTrialStart);
+  const stim = document.getElementById('stroopStimulus');
+  const correctColor = stim.dataset.correctColor;
+  const correct = chosenColor === correctColor;
+  const phase = STROOP_PHASES[stroopPhase];
+
+  stroopResults[phase.id].push({
+    word: stim.dataset.word,
+    inkColor: correctColor,
+    chosen: chosenColor,
+    correct,
+    rt,
+  });
+
+  // Disable buttons
+  STROOP_COLOR_NAMES.forEach(c => {
+    const btn = document.getElementById('stroop-btn-' + c);
+    if (btn) btn.disabled = true;
+  });
+
+  // Feedback
+  const fb = document.getElementById('stroopFeedback');
+  if (correct) {
+    fb.innerHTML = `<span style="color:var(--sage-dark);">Correct — ${rt}ms</span>`;
+  } else {
+    fb.innerHTML = `<span style="color:var(--red-soft);">Wrong — was ${correctColor}, you picked ${chosenColor} — ${rt}ms</span>`;
+  }
+
+  // Next trial or next phase
+  stroopTrial++;
+  if (stroopTrial >= phase.trials) {
+    stroopTrial = 0;
+    stroopPhase++;
+    if (stroopPhase >= STROOP_PHASES.length) {
+      setTimeout(showStroopResults, 1000);
+      return;
+    }
+    // Brief pause between phases
+    setTimeout(() => {
+      const nextPhase = STROOP_PHASES[stroopPhase];
+      document.getElementById('stroopStimulus').textContent = '';
+      document.getElementById('stroopFeedback').innerHTML =
+        `<span style="color:var(--ink); font-size:16px;">Phase ${stroopPhase + 1}: ${nextPhase.label}</span><br>
+         <span style="color:var(--muted); font-size:12px;">Starting in a moment...</span>`;
+      setTimeout(nextStroopTrial, 1500);
+    }, 800);
+  } else {
+    setTimeout(nextStroopTrial, 600);
+  }
+}
+
+function showStroopResults() {
+  document.getElementById('stroop-active').style.display = 'none';
+  document.getElementById('stroop-results').style.display = 'block';
+
+  // Calculate stats per phase
+  function phaseStats(trials) {
+    const correct = trials.filter(t => t.correct);
+    const incorrect = trials.filter(t => !t.correct);
+    const correctRTs = correct.map(t => t.rt);
+    const meanRT = correctRTs.length > 0 ? Math.round(correctRTs.reduce((a, b) => a + b, 0) / correctRTs.length) : 0;
+    const medianRT = correctRTs.length > 0 ? Math.round(correctRTs.sort((a, b) => a - b)[Math.floor(correctRTs.length / 2)]) : 0;
+    return { total: trials.length, correct: correct.length, incorrect: incorrect.length, meanRT, medianRT, accuracy: Math.round(correct.length / trials.length * 100) };
+  }
+
+  const congruent = phaseStats(stroopResults.congruent);
+  const neutral = phaseStats(stroopResults.neutral);
+  const incongruent = phaseStats(stroopResults.incongruent);
+
+  // Interference score = incongruent median - congruent median
+  const interference = incongruent.medianRT - congruent.medianRT;
+  const facilitation = neutral.medianRT - congruent.medianRT;
+
+  let interferenceInterp;
+  if (interference < 100) interferenceInterp = 'Minimal interference — strong inhibitory control';
+  else if (interference < 200) interferenceInterp = 'Typical interference — normal for most adults';
+  else if (interference < 300) interferenceInterp = 'Moderate interference — may reflect age-related slowing or mild executive difficulty';
+  else if (interference < 500) interferenceInterp = 'Elevated interference — warrants further evaluation of executive function';
+  else interferenceInterp = 'High interference — significant difficulty with inhibitory control';
+
+  document.getElementById('stroopScoreboard').innerHTML = `
+    <div class="score-row">
+      <div>
+        <div class="score-label">Congruent (baseline)</div>
+        <div class="score-interp">Accuracy: ${congruent.accuracy}% · Mean: ${congruent.meanRT}ms</div>
+      </div>
+      <div class="score-value">${congruent.medianRT}<span style="font-size:14px;">ms</span></div>
+    </div>
+    <div class="score-row">
+      <div>
+        <div class="score-label">Neutral</div>
+        <div class="score-interp">Accuracy: ${neutral.accuracy}% · Mean: ${neutral.meanRT}ms</div>
+      </div>
+      <div class="score-value">${neutral.medianRT}<span style="font-size:14px;">ms</span></div>
+    </div>
+    <div class="score-row">
+      <div>
+        <div class="score-label">Incongruent</div>
+        <div class="score-interp">Accuracy: ${incongruent.accuracy}% · Mean: ${incongruent.meanRT}ms</div>
+      </div>
+      <div class="score-value">${incongruent.medianRT}<span style="font-size:14px;">ms</span></div>
+    </div>
+    <div class="score-row" style="border-top:2px solid var(--sage); padding-top:14px;">
+      <div>
+        <div class="score-label">Interference Score</div>
+        <div class="score-interp">${interferenceInterp}</div>
+      </div>
+      <div class="score-value" style="color:${interference > 300 ? 'var(--red-soft)' : interference > 200 ? 'var(--warm)' : 'var(--sage-light)'};">+${interference}<span style="font-size:14px;">ms</span></div>
+    </div>
+    ${facilitation !== 0 ? `
+    <div class="score-row">
+      <div>
+        <div class="score-label">Facilitation Effect</div>
+        <div class="score-interp">${facilitation < 0 ? 'Congruent words faster than neutral — word reading facilitates color naming' : 'No facilitation detected'}</div>
+      </div>
+      <div class="score-value">${facilitation > 0 ? '+' : ''}${facilitation}<span style="font-size:14px;">ms</span></div>
+    </div>` : ''}
+  `;
+
+  // Trial breakdown
+  const detailItems = document.getElementById('stroopDetailItems');
+  let html = '';
+  ['congruent', 'neutral', 'incongruent'].forEach(phaseId => {
+    const phaseName = phaseId.charAt(0).toUpperCase() + phaseId.slice(1);
+    const trials = stroopResults[phaseId];
+    html += `<div style="margin-bottom:20px;">
+      <div style="font-weight:600; font-size:13px; margin-bottom:8px;">${phaseName}</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px;">`;
+    trials.forEach(t => {
+      const bg = t.correct ? 'var(--sage)' : 'var(--red-soft)';
+      html += `<span style="background:${bg}; color:white; font-family:'DM Mono',monospace; font-size:10px; padding:3px 6px;"
+        title="${t.word} in ${t.inkColor} ink → ${t.chosen} (${t.correct ? 'correct' : 'wrong'})">${t.rt}ms</span>`;
+    });
+    html += '</div></div>';
+  });
+  detailItems.innerHTML = html;
+
+  // Analysis
+  document.getElementById('stroopAnalysis').innerHTML = `
+    <p>The <strong>Stroop effect</strong> (Stroop, 1935) is your brain's interference between automatic word reading and controlled color naming. Reading is so highly practiced it becomes automatic — overriding it requires active inhibition by the prefrontal cortex.</p>
+    <p style="margin-top:10px;"><strong>Your interference score: ${interference}ms</strong></p>
+    <p>${interference < 100
+      ? 'Very low interference suggests strong inhibitory control. You successfully suppressed the automatic reading response with minimal cost. This is typical of younger adults with high executive function.'
+      : interference < 200
+      ? 'Typical Stroop interference for adults. The 100–200ms cost reflects normal cognitive load when suppressing the reading response. This range is expected for most healthy adults across age groups.'
+      : interference < 300
+      ? 'Moderate interference. The reading response is competing significantly with color naming. This level is common in adults over 60 and may reflect normal age-related slowing of inhibitory processes.'
+      : 'Elevated interference suggests the inhibitory control system is working harder than typical to suppress the automatic reading response. In clinical settings, interference above 300ms prompts further evaluation of frontal/executive function.'
+    }</p>
+    <p style="margin-top:12px; font-size:13px; color:var(--muted);">
+      <strong>Three components measured:</strong><br>
+      1. <strong>Processing speed</strong> — raw reaction time across all conditions<br>
+      2. <strong>Inhibitory control</strong> — the interference score (incongruent − congruent)<br>
+      3. <strong>Selective attention</strong> — accuracy under interference (errors on incongruent trials)
+    </p>
+    <p style="margin-top:8px; font-size:13px; color:var(--muted);">
+      The Stroop effect increases with age and is particularly elevated in frontal lobe dysfunction, ADHD, early dementia, depression, and schizophrenia. However, <strong>a single score is not diagnostic</strong> — device latency, practice effects, and testing conditions all affect results.
+    </p>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetStroop() {
+  document.getElementById('stroop-results').style.display = 'none';
+  document.getElementById('stroop-active').style.display = 'none';
+  document.getElementById('stroop-intro').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+//  FLUENCY RESET
+// ============================================================
+function resetFluency() {
+  clearInterval(fluencyTimer);
+  document.getElementById('fluency-results').style.display = 'none';
+  document.getElementById('fluency-active').style.display = 'none';
+  document.getElementById('fluency-intro').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+//  RESET
+// ============================================================
 function resetAll() {
+  WORDS = cfg.wordSets[Math.floor(Math.random() * cfg.wordSets.length)];
   recallScore = 0; distractorCorrect = 0;
   digitForwardSpan = 0; digitBackwardSpan = 0;
-  dsPhase = 'forward'; dsLevel = 3; dsTrials = 0;
+  dsPhase = 'forward'; dsLevel = cfg.digitStartLevel; dsTrials = 0;
   dsConsecutiveFail = 0; dsAction = 'start';
   clearInterval(distractorTimer);
   setPips(0);
   showPhase('intro');
+}
+
+// ============================================================
+//  NOTES TAB — Markdown loader + renderer
+// ============================================================
+let notesLoaded = false;
+
+function loadNotesIfNeeded() {
+  if (notesLoaded) return;
+  notesLoaded = true;
+  fetch('deep-research-report_Alzheimers_Dementia_Cognition.md')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(md => {
+      document.getElementById('notesBody').innerHTML = renderMarkdown(md);
+    })
+    .catch(() => {
+      document.getElementById('notesBody').innerHTML =
+        '<p style="color:var(--red-soft);">Could not load research report. Make sure the .md file is in the same directory and served via HTTP (not file://).</p>';
+    });
+}
+
+function renderMarkdown(md) {
+  // Strip mermaid / image_group blocks
+  md = md.replace(/```mermaid[\s\S]*?```/g, '<p style="color:var(--muted);font-style:italic;">[Mermaid diagram omitted — view source .md for timeline]</p>');
+  md = md.replace(/image_group\{[\s\S]*?\}/g, '');
+
+  const lines = md.split('\n');
+  let html = '';
+  let inTable = false, tableRowIdx = 0, inCode = false, inList = false, listType = '';
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Code blocks
+    if (line.startsWith('```')) {
+      if (inCode) { html += '</pre>'; inCode = false; }
+      else { html += '<pre>'; inCode = true; }
+      continue;
+    }
+    if (inCode) { html += escHtml(line) + '\n'; continue; }
+
+    // Close list if non-list line
+    if (inList && !line.match(/^[\s]*[-*]\s/) && !line.match(/^[\s]*\d+\.\s/) && line.trim() !== '') {
+      html += listType === 'ul' ? '</ul>' : '</ol>';
+      inList = false;
+    }
+
+    // Tables
+    if (line.includes('|') && line.trim().startsWith('|')) {
+      const cells = line.split('|').slice(1, -1).map(c => c.trim());
+      if (cells.every(c => /^[-:]+$/.test(c))) continue; // separator row
+      if (!inTable) { html += '<div class="table-wrap"><table>'; inTable = true; tableRowIdx = 0; }
+      const tag = tableRowIdx === 0 ? 'th' : 'td';
+      html += '<tr>' + cells.map(c => `<${tag}>${inlineFormat(c)}</${tag}>`).join('') + '</tr>';
+      tableRowIdx++;
+      continue;
+    }
+    if (inTable && (!line.includes('|') || !line.trim().startsWith('|'))) {
+      html += '</table></div>'; inTable = false; tableRowIdx = 0;
+    }
+
+    const trimmed = line.trim();
+    if (trimmed === '') { html += ''; continue; }
+
+    // Headings
+    if (trimmed.startsWith('### ')) { html += '<h3>' + inlineFormat(trimmed.slice(4)) + '</h3>'; continue; }
+    if (trimmed.startsWith('## '))  { html += '<h2>' + inlineFormat(trimmed.slice(3)) + '</h2>'; continue; }
+    if (trimmed.startsWith('# '))   { html += '<h1>' + inlineFormat(trimmed.slice(2)) + '</h1>'; continue; }
+
+    // Unordered list
+    if (trimmed.match(/^[-*]\s/)) {
+      if (!inList || listType !== 'ul') { if (inList) html += '</ol>'; html += '<ul>'; inList = true; listType = 'ul'; }
+      html += '<li>' + inlineFormat(trimmed.replace(/^[-*]\s+/, '')) + '</li>';
+      continue;
+    }
+    // Ordered list
+    if (trimmed.match(/^\d+\.\s/)) {
+      if (!inList || listType !== 'ol') { if (inList) html += '</ul>'; html += '<ol>'; inList = true; listType = 'ol'; }
+      html += '<li>' + inlineFormat(trimmed.replace(/^\d+\.\s+/, '')) + '</li>';
+      continue;
+    }
+
+    // Paragraph
+    html += '<p>' + inlineFormat(trimmed) + '</p>';
+  }
+
+  if (inTable) html += '</table></div>';
+  if (inList) html += listType === 'ul' ? '</ul>' : '</ol>';
+  if (inCode) html += '</pre>';
+  return html;
+}
+
+function inlineFormat(s) {
+  s = escHtml(s);
+  // bold
+  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // italic
+  s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  // inline code
+  s = s.replace(/`(.+?)`/g, '<code>$1</code>');
+  // links
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // strip cite tags (OpenAI deep research artifacts)
+  s = s.replace(/cite[a-z0-9]+/g, '');
+  // entity tags
+  s = s.replace(/entity\[.*?\]/g, '');
+  return s;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 </script>
 </body>

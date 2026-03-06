@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research & References — Cognitive Screening PoC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --paper: #EDE8E0;
+    --sage: #6B8C6E;
+    --sage-light: #A8C4AA;
+    --sage-dark: #4A6B4D;
+    --ink: #1E2320;
+    --ink-mid: #3D4A3F;
+    --muted: #8A9690;
+    --warm: #C4956A;
+    --warm-light: #E8C9A8;
+    --red-soft: #C0614A;
+    --gold: #B8973A;
+    --card-bg: #FAFAF7;
+    --border: #D4CDC3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--sage);
+  }
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+  }
+  .header-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--sage-light);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .back-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--sage-light);
+    text-decoration: none;
+    border: 1px solid var(--sage);
+    padding: 8px 16px;
+    letter-spacing: 0.06em;
+    transition: all 0.15s;
+  }
+  .back-link:hover { background: var(--sage-dark); color: var(--cream); }
+
+  main {
+    padding: 40px 48px 80px;
+    max-width: 900px;
+  }
+
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .page-subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 680px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .card .meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--sage-dark);
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .card p, .card li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-mid);
+    margin-bottom: 10px;
+  }
+  .card ul {
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+  .card a {
+    color: var(--sage-dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sage-light);
+  }
+  .card a:hover { border-color: var(--sage-dark); }
+
+  .card .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .card .link-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .card .link-chip:hover {
+    border-color: var(--sage);
+    color: var(--sage-dark);
+  }
+
+  .warning-box {
+    background: var(--warm-light);
+    border-left: 4px solid var(--warm);
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-mid);
+    margin-bottom: 32px;
+  }
+  .warning-box strong { color: var(--ink); }
+
+  .ref-section {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin-top: 40px;
+  }
+  .ref-section h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  .ref-entry {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-mid);
+    margin-bottom: 14px;
+    padding-left: 28px;
+    text-indent: -28px;
+  }
+  .ref-entry .ref-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--sage-dark);
+    font-weight: 600;
+  }
+  .ref-entry a {
+    color: var(--sage-dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sage-light);
+  }
+  .ref-entry a:hover { border-color: var(--sage-dark); }
+
+  @media (max-width: 640px) {
+    header { padding: 20px; }
+    main { padding: 24px 20px 60px; }
+    .page-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-title">Research & References</div>
+    <div class="header-subtitle">Open-Source Cognitive Screening — Evidence Base</div>
+  </div>
+  <a href="index.html" class="back-link">← Back to Demo</a>
+</header>
+
+<main>
+
+  <div class="page-title">The Science Behind<br>Cognitive Screening</div>
+  <div class="page-subtitle">
+    This page documents every instrument, model, and research finding referenced in the demo. All links point to primary sources — peer-reviewed papers, official instrument sites, and institutional pages.
+  </div>
+
+  <div class="warning-box">
+    <strong>Why this page exists:</strong> Scam sites use the same public-domain cognitive tasks but strip away the clinical context, scoring norms, and research provenance. Transparency about sources is the single clearest signal that separates legitimate tools from predatory ones. A 2016 expert review at UBC found that <strong>all 16 online dementia tests examined scored poor or very poor on ethical grounds</strong>, and three-fourths failed scientific validity checks.
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  INSTRUMENTS USED IN THIS DEMO                               -->
+  <!-- ============================================================ -->
+
+  <div class="section-label">Instruments Used in This Demo</div>
+
+  <div class="card">
+    <h3>Mini-Cog</h3>
+    <div class="meta">3-word recall + clock drawing · ~3 min · Public domain</div>
+    <p>
+      The Mini-Cog was developed by Soo Borson and colleagues at the University of Washington in 2000 as a cognitive "vital signs" measure. It combines a 3-item word recall with a clock-drawing test (CDT) to screen for dementia in primary care. The word recall tests episodic memory; the clock-drawing tests visuospatial ability, executive function, and semantic knowledge.
+    </p>
+    <p>
+      <strong>Clinical performance:</strong> Sensitivity 76–99%, specificity 89–96% for dementia detection across populations. Comparable to the MMSE (79% sensitivity, 88% specificity) but takes a fraction of the time. Not strongly influenced by education, culture, or language — a critical advantage for diverse primary care populations.
+    </p>
+    <p>
+      <strong>Scoring:</strong> Word recall scored 0–3. Score of 0 = positive screen (high risk). Score of 1–2 = clock-drawing determines outcome. Score of 3 = negative screen. The original validation used six standardized word lists with semantically unrelated words from different categories to prevent chunking.
+    </p>
+    <p>
+      <strong>In this demo:</strong> We implement word recall with arithmetic distractor but omit clock-drawing (not feasible in a digital format without stylus input). This reduces clinical validity — noted in the disclaimer.
+    </p>
+    <div class="links">
+      <a href="https://mini-cog.com" target="_blank" class="link-chip">mini-cog.com — Official Site</a>
+      <a href="https://mini-cog.com/about/" target="_blank" class="link-chip">About the Mini-Cog</a>
+      <a href="https://www.alz.org/getmedia/7c51d895-9df8-4819-8ea3-b896ff9a9deb/mini-cog.pdf" target="_blank" class="link-chip">Alzheimer's Association — Mini-Cog PDF</a>
+      <a href="https://hign.org/consultgeri/try-this-series/mental-status-assessment-older-adults-mini-cog" target="_blank" class="link-chip">Hartford Institute — Try This Series</a>
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6491332/" target="_blank" class="link-chip">Cochrane Review — PMC</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Digit Span (WAIS-IV)</h3>
+    <div class="meta">Forward + Backward + Sequencing · Part of Wechsler Adult Intelligence Scale</div>
+    <p>
+      The Digit Span subtest is a core component of the Wechsler Adult Intelligence Scale — Fourth Edition (WAIS-IV, Wechsler 2008). It measures short-term auditory memory (forward), working memory manipulation (backward), and cognitive flexibility (sequencing). In this demo we implement forward and backward only.
+    </p>
+    <p>
+      <strong>Forward Span:</strong> Tests the phonological loop — a component of Baddeley's working memory model that temporarily stores verbal/acoustic information. The average adult span is 7±2 items (Miller, 1956). A forward span below 5 suggests potential impairment.
+    </p>
+    <p>
+      <strong>Backward Span:</strong> Tests working memory manipulation via the central executive — the component most sensitive to early cognitive decline. The expected span is roughly forward span minus 2. A backward span below 3 is clinically significant.
+    </p>
+    <p>
+      <strong>Important:</strong> Forward and backward span represent qualitatively different cognitive processes and should not be combined for clinical interpretation. The WAIS-IV technical manual provides age-stratified normative data; our demo uses general population reference ranges for educational context only.
+    </p>
+    <div class="links">
+      <a href="https://www.sciencedirect.com/topics/psychology/digit-span" target="_blank" class="link-chip">ScienceDirect — Digit Span Overview</a>
+      <a href="https://www.tandfonline.com/doi/full/10.1080/23279095.2024.2330998" target="_blank" class="link-chip">Measuring Working Memory Span with WAIS-IV</a>
+      <a href="https://psycnet.apa.org/record/1957-02914-001" target="_blank" class="link-chip">Miller 1956 — APA PsycNet</a>
+      <a href="http://psychclassics.yorku.ca/Miller/" target="_blank" class="link-chip">Miller 1956 — Full Text (Classics)</a>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  THEORETICAL FRAMEWORK                                       -->
+  <!-- ============================================================ -->
+
+  <div class="section-label">Theoretical Framework</div>
+
+  <div class="card">
+    <h3>Baddeley's Working Memory Model</h3>
+    <div class="meta">Baddeley & Hitch, 1974 · Revised 2000 · Multi-component model</div>
+    <p>
+      The theoretical backbone of both the distractor task and the digit span test. The model posits four components: the <strong>central executive</strong> (attentional control), the <strong>phonological loop</strong> (verbal/acoustic short-term storage), the <strong>visuospatial sketchpad</strong> (visual/spatial short-term storage), and the <strong>episodic buffer</strong> (added in 2000 — integrates information from multiple sources).
+    </p>
+    <p>
+      <strong>Why the distractor matters:</strong> Without an interfering task between word registration and recall, participants can rehearse words via the phonological loop's articulatory rehearsal mechanism, artificially inflating recall scores. The arithmetic distractor forces the central executive to redirect resources, disrupting maintenance rehearsal. Scam sites that skip this step produce meaningless recall scores.
+    </p>
+    <p>
+      <strong>Digit Span connection:</strong> Forward span primarily taxes the phonological loop. Backward span additionally engages the central executive for mental manipulation. This is why backward span is more sensitive to cognitive decline — it requires active processing, not just passive storage.
+    </p>
+    <p>
+      In 2025, Hitch, Allen, and Baddeley published a retrospective on 50 years of the model, confirming its continued relevance and noting the episodic buffer's role in binding information across domains.
+    </p>
+    <div class="links">
+      <a href="https://en.wikipedia.org/wiki/Baddeley%27s_model_of_working_memory" target="_blank" class="link-chip">Wikipedia — Baddeley's Model</a>
+      <a href="https://www.simplypsychology.org/working-memory.html" target="_blank" class="link-chip">Simply Psychology — Working Memory</a>
+      <a href="https://journals.sagepub.com/doi/10.1177/17470218241290909" target="_blank" class="link-chip">Hitch et al. 2025 — 50 Years On</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Miller's Law — The Magical Number Seven</h3>
+    <div class="meta">Miller, 1956 · Psychological Review · ~20,000 citations</div>
+    <p>
+      George A. Miller's 1956 paper established that the capacity of short-term memory is approximately 7±2 "chunks" of information. This is the normative benchmark for Digit Span Forward — the average adult can recall about 7 digits in sequence.
+    </p>
+    <p>
+      Miller clarified that the limit is not in bits but in chunks — the largest meaningful unit a person can recognize. This is why semantically unrelated words (as in the Mini-Cog) are harder to recall than words that can be grouped into meaningful categories.
+    </p>
+    <div class="links">
+      <a href="https://psycnet.apa.org/record/1957-02914-001" target="_blank" class="link-chip">APA PsycNet — Original Paper</a>
+      <a href="http://psychclassics.yorku.ca/Miller/" target="_blank" class="link-chip">Full Text — Classics in Psychology</a>
+      <a href="https://labs.la.utexas.edu/gilden/files/2016/04/MagicNumberSeven-Miller1956.pdf" target="_blank" class="link-chip">PDF — UT Austin</a>
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4486516/" target="_blank" class="link-chip">Miller's Number in Retrospect — PMC</a>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  REGENSTRIEF PASSIVE DIGITAL MARKER                          -->
+  <!-- ============================================================ -->
+
+  <div class="section-label">Passive Digital Detection — Regenstrief Institute</div>
+
+  <div class="card">
+    <h3>Regenstrief Passive Digital Marker</h3>
+    <div class="meta">Boustani et al. · Open source · No licensing fee · NLP on EHR data</div>
+    <p>
+      A fundamentally different approach to dementia detection. Rather than asking patients to take a test, the passive digital marker uses machine learning and natural language processing to analyze data already in electronic health records — diagnostic codes, prescription information, and clinical notes mentioning memory issues, vascular concerns, and comorbid conditions.
+    </p>
+    <p>
+      <strong>Clinical trial results:</strong> In a pragmatic randomized trial of 5,000+ primary care patients, combining the passive digital marker with the Quick Dementia Rating System (QDRS) increased new ADRD diagnoses by 31% compared to usual care — without requiring additional clinician time or costly testing.
+    </p>
+    <p>
+      <strong>How it works:</strong> The system automatically invites patients aged 65+ to complete the QDRS through their patient portal while the algorithm continuously analyzes existing clinical data. Results appear in the clinician's EHR inbox, prompting further evaluation only when necessary.
+    </p>
+    <p>
+      <strong>Open source:</strong> Following Regenstrief's tradition of open medical record methodology, there is no licensing fee. Any healthcare system with an EHR and the right personnel can implement it — the only cost is deployment, like any standard application.
+    </p>
+    <p>
+      This represents what legitimate, research-backed cognitive screening looks like at scale — the polar opposite of scam sites that monetize anxiety with unvalidated front-end games.
+    </p>
+    <div class="links">
+      <a href="https://www.regenstrief.org/article/ai-driven-digital-detection-identifies-adrd/" target="_blank" class="link-chip">Regenstrief — AI-Driven Detection</a>
+      <a href="https://www.regenstrief.org/article/digital-detection-of-dementia-using-ai-to-identify-undiagnosed-dementia/" target="_blank" class="link-chip">Regenstrief — D3 Overview</a>
+      <a href="https://medicine.iu.edu/news/2025/11/regenstrief-ai-alzheimers-detection" target="_blank" class="link-chip">IU School of Medicine — Press Release</a>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/36221141/" target="_blank" class="link-chip">PubMed — D3 Study Protocol</a>
+      <a href="https://www.regenstrief.org/in-the-news/boustani-diagnostics-world-passive-digital-marker-identify-dementia-risk/" target="_blank" class="link-chip">Diagnostics World — Passive Digital Marker</a>
+      <a href="https://www.genengnews.com/topics/artificial-intelligence/new-ai-tool-boosts-early-detection-of-dementia-in-primary-care/" target="_blank" class="link-chip">GEN — AI Tool Boosts Detection</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Quick Dementia Rating System (QDRS)</h3>
+    <div class="meta">Galvin, 2015 · 10 items · Caregiver or patient-reported · 3–5 min</div>
+    <p>
+      The QDRS is a rapid dementia staging tool developed by James E. Galvin. It is a 10-item questionnaire covering memory and recall, orientation, decision making, activities, personal hygiene, behavior, language, mood, and attention. Scores range from 0–30, with higher scores indicating greater impairment.
+    </p>
+    <p>
+      <strong>Validation:</strong> Tested against the Clinical Dementia Rating (CDR) in 267 patient-caregiver dyads. Concurrent validity with CDR: r = 0.801 (P < .001). The QDRS reliably differentiates individuals with and without dementia and accurately stages severity without clinician input.
+    </p>
+    <p>
+      The QDRS was the companion instrument used in the Regenstrief JAMA trial — patients completed it through their patient portal, and results were paired with passive digital marker analysis for flagging.
+    </p>
+    <div class="links">
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4484882/" target="_blank" class="link-chip">PMC — QDRS Original Paper</a>
+      <a href="https://alz-journals.onlinelibrary.wiley.com/doi/10.1016/j.dadm.2015.03.003" target="_blank" class="link-chip">Alzheimer's & Dementia — Galvin 2015</a>
+      <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0240422" target="_blank" class="link-chip">PLOS ONE — Patient Version QDRS</a>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  OTHER OPEN-SOURCE INSTRUMENTS                               -->
+  <!-- ============================================================ -->
+
+  <div class="section-label">Other Open-Source / Public Domain Instruments</div>
+
+  <div class="card">
+    <h3>MoCA — Montreal Cognitive Assessment</h3>
+    <div class="meta">Nasreddine et al., 2005 · 10 min · Free at mocatest.org · Clinician registration required</div>
+    <p>
+      A comprehensive 30-point battery covering memory (delayed recall), visuospatial/executive function (trail-making, cube copy, clock-drawing), attention (digit span, serial 7s, vigilance), language (naming, repetition, fluency), abstraction, and orientation. Score ≥26 considered normal.
+    </p>
+    <p>
+      The MoCA was designed specifically to detect mild cognitive impairment (MCI), where the MMSE often fails. It is freely available in 100+ languages but requires clinician certification through the official training program for clinical interpretation.
+    </p>
+    <p>
+      <strong>Scam site abuse:</strong> This is one of the most commonly plagiarized assessments. Scam sites reproduce MoCA-style questions without the standardized administration protocol, scoring norms, or clinician oversight — then gatekeep results behind phone numbers or payments.
+    </p>
+    <div class="links">
+      <a href="https://mocacognition.com/" target="_blank" class="link-chip">mocacognition.com — Official Site</a>
+      <a href="https://mocacognition.com/the-moca-test/" target="_blank" class="link-chip">The MoCA Test — Overview</a>
+      <a href="https://www.physio-pedia.com/Montreal_Cognitive_Assessment_(MoCA)" target="_blank" class="link-chip">Physiopedia — MoCA</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>SLUMS — Saint Louis University Mental Status</h3>
+    <div class="meta">Tariq et al., 2006 · 11 items · ~7 min · Public domain</div>
+    <p>
+      A 30-point, 11-question screening tool for MCI and dementia. Tests orientation, memory, attention, and executive functions. Developed as a free, public domain alternative to the MMSE (which was copyrighted and licensed).
+    </p>
+    <p>
+      <strong>Cut-off scores (adjusted for education):</strong><br>
+      High school education: Normal ≥27, MCI 21–26, Dementia ≤20.<br>
+      Less than high school: Normal ≥25, MCI 20–24, Dementia ≤19.
+    </p>
+    <p>
+      Saint Louis University retains copyright but does not charge for clinical or research use. An online training video is provided and should be reviewed before administration.
+    </p>
+    <div class="links">
+      <a href="https://www.slu.edu/medicine/internal-medicine/geriatric-medicine/aging-successfully/assessment-tools/mental-status-exam.php" target="_blank" class="link-chip">SLU — Official SLUMS Page</a>
+      <a href="https://www.slu.edu/medicine/internal-medicine/geriatric-medicine/aging-successfully/-pdf/slums-form.pdf" target="_blank" class="link-chip">SLUMS Exam Form — PDF</a>
+      <a href="https://www.sralab.org/rehabilitation-measures/saint-louis-university-mental-status-exam" target="_blank" class="link-chip">RehabMeasures — SLUMS</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>SAGE — Self-Administered Gerocognitive Exam</h3>
+    <div class="meta">Scharre et al., 2010 · Self-administered · Paper-based · Free from Ohio State</div>
+    <p>
+      A brief cognitive screening instrument designed to be entirely self-administered — no clinician needed for test-taking (only for scoring and interpretation). SAGE tests orientation, language, reasoning, visuospatial ability, problem solving, and memory.
+    </p>
+    <p>
+      Four interchangeable test forms are available. Patients take a different form each time to prevent practice effects when monitoring over time. No fee for individual clinical use and noncommercial educational use.
+    </p>
+    <p>
+      SAGE is notable because it can be completed at home and brought to a healthcare provider — making it one of the few validated instruments that works outside the clinic, which is exactly why scam sites target this format.
+    </p>
+    <div class="links">
+      <a href="https://wexnermedical.osu.edu/brain-spine-neuro/memory-disorders/sage" target="_blank" class="link-chip">Ohio State — SAGE Official Page</a>
+      <a href="https://wexnermedical.osu.edu/-/media/files/wexnermedical/patient-care/healthcare-services/brain-spine-neuro/memory-disorders/sage/forms/sage-form-1-nz.pdf" target="_blank" class="link-chip">SAGE Form 1 — PDF</a>
+      <a href="https://www.dementiacarecentral.com/self-administered-gerocognitive-exam/" target="_blank" class="link-chip">Dementia Care Central — SAGE Guide</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>AD8 — Eight-Item Informant Interview</h3>
+    <div class="meta">Galvin et al., 2005 · Caregiver-reported · 8 items · Washington University</div>
+    <p>
+      The AD8 is a brief informant-based interview designed to discriminate between normal aging and mild dementia. A caregiver, spouse, or adult child answers 8 yes/no questions about changes in memory, orientation, judgment, and function. Score ≥2 indicates cognitive impairment warranting further evaluation.
+    </p>
+    <p>
+      Unlike the other instruments listed here, the AD8 is <strong>not fully open source</strong> — it is copyrighted by Washington University and requires a license for both commercial and non-profit research use. However, the instrument itself is widely published and the questions are available in the original Neurology paper.
+    </p>
+    <div class="links">
+      <a href="https://knightadrc.wustl.edu/professionals-clinicians/ad8-instrument/" target="_blank" class="link-chip">Knight ADRC — AD8 Instrument</a>
+      <a href="https://www.neurology.org/doi/10.1212/01.wnl.0000172958.95282.2a" target="_blank" class="link-chip">Neurology — Galvin et al. 2005</a>
+      <a href="https://www.alz.org/getmedia/6e7291bf-4ac8-40ed-a148-824d4591ed7e/ad8-dementia-screening.pdf" target="_blank" class="link-chip">Alzheimer's Association — AD8 PDF</a>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  THE SCAM PROBLEM                                            -->
+  <!-- ============================================================ -->
+
+  <div class="section-label">The Online Screening Scam Problem</div>
+
+  <div class="card">
+    <h3>Why Online Dementia Tests Get an "F"</h3>
+    <div class="meta">Evidence from systematic reviews and expert panels</div>
+    <p>
+      A research team at the University of British Columbia assembled an expert panel of physicians, psychologists, and ethicists to review 16 online dementia screening tests. Their findings:
+    </p>
+    <ul>
+      <li><strong>All 16 scored poor or very poor on ethical grounds</strong> — no confidentiality policies, undisclosed conflicts of interest, and outcomes worded so that regardless of response, results pointed toward a dementia diagnosis.</li>
+      <li><strong>75% failed scientific validity and reliability checks</strong> — making them useless for actual diagnosis.</li>
+      <li>Some were directly linked to supplement companies whose 21-question "tests" asked only 2 memory questions, with the remainder about diet, deodorant use, and tap water — always concluding with "moderate Alzheimer's risk" and a purchase recommendation.</li>
+    </ul>
+    <p>
+      <strong>What scam sites do:</strong>
+    </p>
+    <ul>
+      <li>Lift public-domain assessment formats (Mini-Cog, MoCA, SAGE) without attribution</li>
+      <li>Skip critical protocol elements (distractor tasks, standardized word lists, clock-drawing)</li>
+      <li>Withhold scores behind paywalls, phone numbers, or email harvesting</li>
+      <li>Claim diagnostic validity they don't have — no IRB approval, no validation studies</li>
+      <li>Use alarming animations and language to trigger anxiety and drive conversions</li>
+      <li>Provide no normative context ("your score is 4" means nothing without reference ranges)</li>
+    </ul>
+    <div class="links">
+      <a href="https://www.brainandlife.org/articles/an-f-for-online-dementia-tests" target="_blank" class="link-chip">Brain & Life — Why Online Tests Get an F</a>
+      <a href="https://neurox.us/can-you-trust-online-cognitive-tests-for-dementia/" target="_blank" class="link-chip">NeuroX — Can You Trust Online Tests?</a>
+      <a href="https://eastleighcarehomes.co.uk/blog/can-you-trust-a-dementia-test-online/" target="_blank" class="link-chip">Eastleigh — Get the Facts</a>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  FULL BIBLIOGRAPHY                                           -->
+  <!-- ============================================================ -->
+
+  <div class="ref-section">
+    <h3>Full Bibliography</h3>
+
+    <div class="ref-entry">
+      <span class="ref-id">[1]</span> Borson, S., Scanlan, J., Brush, M., Vitaliano, P., & Dokmak, A. (2000). The Mini-Cog: A cognitive 'vital signs' measure for dementia screening in multi-lingual elderly. <em>International Journal of Geriatric Psychiatry</em>, 15(11), 1021–1027. <a href="https://doi.org/10.1002/1099-1166(200011)15:11%3C1021::AID-GPS234%3E3.0.CO;2-6" target="_blank">doi:10.1002/1099-1166</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[2]</span> Wechsler, D. (2008). <em>Wechsler Adult Intelligence Scale — Fourth Edition (WAIS-IV)</em>. San Antonio, TX: Pearson.
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[3]</span> Tsoi, K. K. F., Chan, J. Y. C., Hirai, H. W., Wong, S. Y. S., & Kwok, T. C. Y. (2015). Cognitive tests to detect dementia: A systematic review and meta-analysis. <em>JAMA Internal Medicine</em>, 175(9), 1450–1458. <a href="https://doi.org/10.1001/jamainternmed.2015.2152" target="_blank">doi:10.1001/jamainternmed.2015.2152</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[4]</span> Baddeley, A. (2000). The episodic buffer: A new component of working memory? <em>Trends in Cognitive Sciences</em>, 4(11), 417–423. <a href="https://doi.org/10.1016/S1364-6613(00)01538-2" target="_blank">doi:10.1016/S1364-6613(00)01538-2</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[5]</span> Borson, S., Scanlan, J. M., Watanabe, J., Tu, S. P., & Lessig, M. (2006). Improving identification of cognitive impairment in primary care. <em>International Journal of Geriatric Psychiatry</em>, 21(4), 349–355. <a href="https://doi.org/10.1002/gps.1470" target="_blank">doi:10.1002/gps.1470</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[6]</span> Miller, G. A. (1956). The magical number seven, plus or minus two: Some limits on our capacity for processing information. <em>Psychological Review</em>, 63(2), 81–97. <a href="https://doi.org/10.1037/h0043158" target="_blank">doi:10.1037/h0043158</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[7]</span> Boustani, M., Perkins, A. J., Khandker, R. K., et al. (2020). Passive digital signature for early identification of Alzheimer's disease and related dementia. <em>Journal of the American Geriatrics Society</em>, 68(3), 511–518. <a href="https://doi.org/10.1111/jgs.16218" target="_blank">doi:10.1111/jgs.16218</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[8]</span> Galvin, J. E., Roe, C. M., Powlishta, K. K., et al. (2005). The AD8: A brief informant interview to detect dementia. <em>Neurology</em>, 65(4), 559–564. <a href="https://doi.org/10.1212/01.wnl.0000172958.95282.2a" target="_blank">doi:10.1212/01.wnl.0000172958.95282.2a</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[9]</span> Tariq, S. H., Tumosa, N., Chibnall, J. T., Perry, M. H., & Morley, J. E. (2006). Comparison of the Saint Louis University Mental Status examination and the Mini-Mental State Examination for detecting dementia and mild neurocognitive disorder. <em>American Journal of Geriatric Psychiatry</em>, 14(11), 900–910. <a href="https://doi.org/10.1097/01.JGP.0000221510.33817.86" target="_blank">doi:10.1097/01.JGP.0000221510.33817.86</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[10]</span> Scharre, D. W., Chang, S. I., Murden, R. A., et al. (2010). Self-administered Gerocognitive Examination (SAGE): A brief cognitive assessment instrument for mild cognitive impairment and early dementia. <em>Alzheimer Disease & Associated Disorders</em>, 24(1), 64–71. <a href="https://doi.org/10.1097/WAD.0b013e3181b03277" target="_blank">doi:10.1097/WAD.0b013e3181b03277</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[11]</span> Galvin, J. E. (2015). The Quick Dementia Rating System (QDRS): A rapid dementia staging tool. <em>Alzheimer's & Dementia: Diagnosis, Assessment & Disease Monitoring</em>, 1(2), 249–259. <a href="https://doi.org/10.1016/j.dadm.2015.03.003" target="_blank">doi:10.1016/j.dadm.2015.03.003</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[12]</span> Nasreddine, Z. S., Phillips, N. A., Bédirian, V., et al. (2005). The Montreal Cognitive Assessment, MoCA: A brief screening tool for mild cognitive impairment. <em>Journal of the American Geriatrics Society</em>, 53(4), 695–699. <a href="https://doi.org/10.1111/j.1532-5415.2005.53221.x" target="_blank">doi:10.1111/j.1532-5415.2005.53221.x</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[13]</span> Baddeley, A. D., & Hitch, G. (1974). Working memory. In G. H. Bower (Ed.), <em>The Psychology of Learning and Motivation</em> (Vol. 8, pp. 47–89). Academic Press.
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[14]</span> Hitch, G. J., Allen, R. J., & Baddeley, A. D. (2025). The multicomponent model of working memory fifty years on. <em>Quarterly Journal of Experimental Psychology</em>. <a href="https://doi.org/10.1177/17470218241290909" target="_blank">doi:10.1177/17470218241290909</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[15]</span> Feger, D. M., Willis, P., Paying, A., & Bhatt, P. (2024). The diagnostic accuracy of the Mini-Cog screening tool for the detection of cognitive impairment — A systematic review and meta-analysis. <em>PLOS ONE</em>, 19(3), e0298686. <a href="https://doi.org/10.1371/journal.pone.0298686" target="_blank">doi:10.1371/journal.pone.0298686</a>
+    </div>
+
+    <div class="ref-entry">
+      <span class="ref-id">[16]</span> Borson, S., Scanlan, J. M., Chen, P., & Ganguli, M. (2003). The Mini-Cog as a screen for dementia: Validation in a population-based sample. <em>Journal of the American Geriatrics Society</em>, 51(10), 1451–1454. <a href="https://doi.org/10.1046/j.1532-5415.2003.51465.x" target="_blank">doi:10.1046/j.1532-5415.2003.51465.x</a>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>
