@@ -1170,26 +1170,38 @@
 // ============================================================
 //  GAME CONFIGS
 // ============================================================
-const WORD_SETS_3 = [
-  ["BANANA", "SUNRISE", "CHAIR"],
-  ["LEADER", "SEASON", "TABLE"],
-  ["VILLAGE", "KITCHEN", "BABY"],
-  ["RIVER", "NATION", "FINGER"],
-  ["CAPTAIN", "GARDEN", "PICTURE"],
-  ["DAUGHTER", "HEAVEN", "MOUNTAIN"],
-];
-const WORD_SETS_5 = [
-  ["OCEAN", "HAMMER", "TULIP", "BLANKET", "CHURCH"],
-  ["FOREST", "TRUMPET", "MARBLE", "CANDLE", "SADDLE"],
-  ["CARPET", "LIGHTNING", "PENCIL", "HARBOR", "RABBIT"],
-  ["CASTLE", "MELON", "FEATHER", "SOLDIER", "WINDOW"],
-  ["BASKET", "VOLCANO", "RIBBON", "COMPASS", "BUTTER"],
-];
+// Word pool organized by semantic categories — one word per category per set
+// ensures no semantic clustering (reduces chunking advantage per Baddeley 2000)
+const WORD_POOL = {
+  nature:    ["RIVER","OCEAN","FOREST","MOUNTAIN","VOLCANO","SUNSET","ISLAND","GLACIER","MEADOW","CANYON","DESERT","WATERFALL","VALLEY","PRAIRIE","TORNADO"],
+  food:      ["BANANA","MELON","BUTTER","PEPPER","CHERRY","PRETZEL","MANGO","GARLIC","BISCUIT","WALNUT","LEMON","GINGER","OLIVE","APRICOT","COCONUT"],
+  furniture: ["CHAIR","TABLE","CARPET","BLANKET","PILLOW","CURTAIN","MIRROR","CABINET","BASKET","LANTERN","CUSHION","HAMMOCK","DRESSER","CANDLE","SHELF"],
+  body:      ["FINGER","ELBOW","SHOULDER","ANKLE","FOREHEAD","KNUCKLE","TEMPLE","EYELID","NOSTRIL","WRIST","KNEECAP","JAWLINE","RIBCAGE","PALM","SPINE"],
+  building:  ["CHURCH","CASTLE","VILLAGE","TOWER","CABIN","TEMPLE","HARBOR","PALACE","COTTAGE","CHAPEL","BARN","FORTRESS","ARCADE","MARKET","BRIDGE"],
+  tool:      ["HAMMER","PENCIL","COMPASS","RIBBON","LADDER","ANCHOR","SHOVEL","PLIERS","CHISEL","WRENCH","NEEDLE","BUCKET","FUNNEL","MAGNET","PADDLE"],
+  animal:    ["RABBIT","FALCON","DOLPHIN","SPIDER","PENGUIN","PANTHER","LIZARD","PARROT","BEETLE","SALMON","DONKEY","PELICAN","BADGER","CRICKET","TURTLE"],
+  abstract:  ["LEADER","NATION","HEAVEN","CAPTAIN","SOLDIER","SEASON","LEGEND","VOYAGE","WISDOM","SPIRIT","FORTUNE","MYSTERY","FREEDOM","TRIUMPH","JUSTICE"],
+  plant:     ["TULIP","GARDEN","FEATHER","WILLOW","BLOSSOM","ORCHID","CLOVER","BAMBOO","CACTUS","PEBBLE","ACORN","JASMINE","DAISY","FERN","MAPLE"],
+  fabric:    ["SADDLE","MARBLE","VELVET","COTTON","LINEN","DENIM","SATIN","LEATHER","BURLAP","FLANNEL","CANVAS","SUEDE","TWEED","NYLON","SILK"],
+};
+const POOL_CATEGORIES = Object.keys(WORD_POOL);
+
+function generateWordSet(count) {
+  // Pick `count` random categories, then one random word from each
+  const cats = [...POOL_CATEGORIES];
+  for (let i = cats.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cats[i], cats[j]] = [cats[j], cats[i]];
+  }
+  return cats.slice(0, count).map(cat => {
+    const words = WORD_POOL[cat];
+    return words[Math.floor(Math.random() * words.length)];
+  });
+}
 
 const CONFIGS = {
   minicog: {
     name: 'Mini-Cog',
-    wordSets: WORD_SETS_3,
     wordCount: 3,
     distractorTime: 30,
     distractorOps: ['+', '-'],
@@ -1201,7 +1213,6 @@ const CONFIGS = {
   },
   minicogplus: {
     name: 'Mini-Cog+',
-    wordSets: WORD_SETS_5,
     wordCount: 5,
     distractorTime: 45,
     distractorOps: ['+', '-', '×'],
@@ -1219,7 +1230,7 @@ let cfg = CONFIGS.minicog;
 // ============================================================
 //  STATE
 // ============================================================
-let WORDS = cfg.wordSets[Math.floor(Math.random() * cfg.wordSets.length)];
+let WORDS = generateWordSet(cfg.wordCount);
 let recallScore = 0;
 let distractorCorrect = 0;
 let digitForwardSpan = 0;
@@ -1365,7 +1376,7 @@ function setPips(activeIdx) {
 //  INTRO → REGISTER
 // ============================================================
 function startTest() {
-  WORDS = cfg.wordSets[Math.floor(Math.random() * cfg.wordSets.length)];
+  WORDS = generateWordSet(cfg.wordCount);
 
   // Move test content into fullscreen modal
   const testTab = document.getElementById('tab-test');
@@ -2460,7 +2471,7 @@ function resetFluency() {
 //  RESET
 // ============================================================
 function resetAll() {
-  WORDS = cfg.wordSets[Math.floor(Math.random() * cfg.wordSets.length)];
+  WORDS = generateWordSet(cfg.wordCount);
   recallScore = 0; distractorCorrect = 0;
   digitForwardSpan = 0; digitBackwardSpan = 0;
   dsPhase = 'forward'; dsLevel = cfg.digitStartLevel; dsTrials = 0;
