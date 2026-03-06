@@ -2583,23 +2583,22 @@ function escHtml(s) {
 // ============================================================
 //  FULLSCREEN MODAL + NUMPAD
 // ============================================================
-const modal = document.getElementById('testModal');
-const modalBody = document.getElementById('testModalBody');
-const numpad = document.getElementById('numpad');
 let numpadTarget = null; // 'distractor' | 'digit'
 let numpadDigitIndex = 0;
+let modalSourceTab = null;
+
+function getModal() { return document.getElementById('testModal'); }
+function getNumpad() { return document.getElementById('numpad'); }
 
 function openModal(title, sourceTab) {
   modalSourceTab = sourceTab || null;
   document.getElementById('modalTitle').textContent = title || 'Assessment';
-  modal.classList.add('open');
+  getModal().classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-let modalSourceTab = null;
-
 function closeModal() {
-  modal.classList.remove('open');
+  getModal().classList.remove('open');
   document.body.style.overflow = '';
   hideNumpad();
   clearInterval(distractorTimer);
@@ -2620,12 +2619,12 @@ function closeModal() {
 
 function showNumpad(target) {
   numpadTarget = target;
-  numpad.classList.add('visible');
+  getNumpad().classList.add('visible');
 }
 
 function hideNumpad() {
   numpadTarget = null;
-  numpad.classList.remove('visible');
+  getNumpad().classList.remove('visible');
 }
 
 function numpadPress(val) {
